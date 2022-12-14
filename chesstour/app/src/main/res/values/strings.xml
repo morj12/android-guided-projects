@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Chess Tour</string>
+    <string name="title">Chess Tour</string>
+    <string name="level">Level</string>
+    <string name="moves">Moves</string>
+    <string name="time">Time</string>
+    <string name="options">Options</string>
+    <string name="instructions">Move the piece over the board to complete all cells.</string>
+
+</resources>
