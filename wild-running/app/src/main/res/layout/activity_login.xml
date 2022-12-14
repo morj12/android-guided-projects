@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/gray_dark">
+
+    <ImageView
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="207dp"
+        app:srcCompat="@mipmap/banner"
+        />
+    
+    <TextView
+        android:id="@+id/txtInvitation"
+        style="@style/viewCustom"
+        android:paddingTop="20dp"
+        android:gravity="center_horizontal"
+        android:textSize="15sp"
+        android:textColor="@color/orange"
+        android:text="@string/invitation"
+        />
+
+    <EditText
+        android:id="@+id/etEmail"
+        style="@style/viewCustom"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
+        android:paddingTop="30dp"
+        android:layout_marginTop="0dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:backgroundTint="@color/white"
+        />
+
+    <EditText
+        android:id="@+id/etPassword"
+        style="@style/viewCustom"
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        android:paddingTop="30dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:backgroundTint="@color/white"
+        />
+
+    <TextView
+        android:id="@+id/btnLogin"
+        style="@style/viewCustom"
+        android:background="@color/green"
+        android:textSize="20sp"
+        android:paddingTop="7dp"
+        android:paddingBottom="7dp"
+        android:textAlignment="center"
+        android:text="@string/login"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:onClick="onLoginClicked"
+        />
+
+    <TextView
+        android:id="@+id/btnForgotPassword"
+        style="@style/viewCustom"
+        android:gravity="center_horizontal"
+        android:textAlignment="center"
+        android:text="@string/forgotPassword"
+        android:textColor="@color/gray"
+        android:onClick="onForgotPasswordClicked"
+        />
+
+
+        <TextView
+            android:id="@+id/btnLoginGoogle"
+            style="@style/viewCustom"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:text="@string/google"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:onClick="onLoginGoogleClicked"
+            android:background="@color/blue_dark"
+            app:drawableStartCompat="@drawable/google" />
+
+
+    <LinearLayout
+        android:id="@+id/llTerms"
+        style="@style/viewCustom"
+        android:orientation="horizontal"
+        android:backgroundTint="@color/gray_dark"
+        android:gravity="center"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/agree"
+            android:textSize="11sp"
+            android:textColor="@color/white"
+            />
+
+        <TextView
+            android:id="@+id/tvTerms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/terms"
+            android:textSize="11sp"
+            android:textColor="@color/salmon"
+            android:layout_marginStart="4dp"
+            android:onClick="onTermsClicked"
+            />
+
+    </LinearLayout>
+
+
+</LinearLayout>

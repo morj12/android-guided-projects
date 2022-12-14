@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group>
+        <item android:id="@+id/nav_item_main"
+            android:icon="@drawable/camino"
+            android:title="@string/menu_running"
+            />
+        <item android:id="@+id/nav_item_record"
+            android:icon="@drawable/gallery"
+            android:title="@string/menu_record"
+            />
+    </group>
+
+    <item android:title="@string/account" >
+        <menu>
+            <item android:id="@+id/nav_item_clearprefs"
+                android:icon="@android:drawable/ic_popup_sync"
+                android:title="@string/menu_clear_preferences"/>
+            <item android:id="@+id/nav_item_signout"
+                android:icon="@drawable/logout"
+                android:title="@string/menu_signout"/>
+        </menu>
+    </item>
+</menu>

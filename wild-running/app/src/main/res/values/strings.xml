@@ -1,0 +1,146 @@
+<resources>
+    <string name="app_name">WildRunning</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="forgotPassword">Forgot my password</string>
+    <string name="login">Log in</string>
+    <string name="resetPassword">Send password</string>
+    <string name="invitation">What level can you reach?</string>
+
+
+    <string name="agree">By creating an account, you agree to</string>
+    <string name="terms">the terms and conditions.</string>
+
+    <string name="register">This account does not exist. Do you want to create it?</string>
+    <string name="registerPetition">Register / Log in</string>
+
+    <string name="google">Log in with Google</string>
+
+    <string name="bar_title_terms">Terms and conditions</string>
+    <string name="terms1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent rhoncus convallis metus at pretium. Vivamus at lacinia leo. Praesent velit elit, suscipit sit amet pulvinar id, imperdiet ac massa. Quisque molestie lectus rhoncus urna tempor, ut lacinia mi tempor. Praesent volutpat, ligula eget lobortis cursus, mauris libero consequat ligula, nec scelerisque erat ipsum tempor justo. Aliquam ornare faucibus augue vel faucibus. Ut sollicitudin commodo tortor eu faucibus. Vestibulum lacinia ligula sed tortor auctor, vitae sollicitudin lorem dapibus. Phasellus sed tincidunt odio.</string>
+    <string name="terms2">Praesent arcu nisi, auctor quis tempor id, vehicula non nulla. Sed a fermentum tellus, quis pharetra lorem. Fusce vehicula libero in ultricies varius. Suspendisse vel velit tortor. Aliquam non nisi eget lectus tempor consectetur sed in magna. Nullam tincidunt, nibh ut sodales suscipit, ante est luctus purus, sed pellentesque ipsum massa et quam. Proin sed sapien ultrices ex aliquet elementum sed et erat. Sed tincidunt felis sapien, a suscipit massa cursus et. Phasellus auctor tellus ac neque maximus accumsan. Morbi sit amet odio nec sapien pharetra elementum maximus id odio. Integer laoreet, neque id efficitur auctor, magna massa consequat justo, quis vehicula ipsum massa at sem. Morbi in ornare sapien, in luctus mauris. </string>
+    <string name="terms3">Sed id libero auctor, lacinia lectus a, consequat nisl. Nam quis suscipit purus. Fusce at congue quam. Etiam congue imperdiet bibendum. Etiam at porttitor ipsum. Donec consectetur sapien in neque tempus tempus. Sed vulputate rutrum ultrices. Praesent in est leo. Suspendisse euismod purus id urna tempus pellentesque. Praesent condimentum nisl sit amet purus pulvinar sagittis. Cras purus felis, hendrerit et ornare ut, molestie id orci. Integer dictum consequat leo, id pretium urna tempus et. Donec nibh ante, laoreet id lorem vitae, vestibulum sollicitudin lorem. </string>
+
+    <string name="bar_title">WildRunning</string>
+    <string name="menu_running">Running</string>
+    <string name="menu_record">Records</string>
+    <string name="menu_clear_preferences">Clear preferences</string>
+    <string name="menu_signout">Sign out</string>
+    <string name="menu_link">Sample link</string>
+
+    <string name="account">Account</string>
+    <string name="default_user">User</string>
+    <string name="level">Level</string>
+    <string name="runs">RUNS</string>
+    <string name="distance">DISTANCE</string>
+    <string name="navigation_drawer_close">Close</string>
+    <string name="navigation_drawer_open">Menu</string>
+    <string name="title_activity_amogus">AmogusActivity</string>
+
+
+    <string name="bar_title_record">Records</string>
+    <string name="orderby_dateZA">Date (newest)</string>
+    <string name="orderby_durationZA">Duration (highest)</string>
+    <string name="orderby_distanceZA">Distance (highest)</string>
+    <string name="orderby_avgspeedZA">Average speed (highest)</string>
+    <string name="orderby_maxspeedZA">Maximum speed (highest)</string>
+
+    <string name="orderby_dateAZ">Date (oldest)</string>
+    <string name="orderby_durationAZ">Duration (lowest)</string>
+    <string name="orderby_distanceAZ">Distance (lowest)</string>
+    <string name="orderby_avgspeedAZ">Average speed (lowest)</string>
+    <string name="orderby_maxspeedAZ">Maximum speed (lowest)</string>
+
+
+    <string name="finish">Finish</string>
+    <string name="chrono_start">00:00:00</string>
+    <string name="chrono_end">01:00:00</string>
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
+    <string name="rounds">Round 1</string>
+    <string name="running_time">Running Time</string>
+    <string name="walking_time">Walking Time</string>
+    <string name="walking_clock">00:00</string>
+
+    <string name="hard_volume">Hard music volume</string>
+    <string name="soft_volume">Soft music volume</string>
+    <string name="notification_volume">Notification volume</string>
+    <string name="hard_position">00:00:00</string>
+    <string name="hard_duration">01:00:00</string>
+    <string name="soft_position">00:00:00</string>
+    <string name="soft_duration">01:00:00</string>
+
+    <string name="PopUpTotalRuns">Run: </string>
+    <string name="PopUpTotalDistance">Km accumulated: </string>
+    <string name="PopUpTotalTime">Total time: </string>
+    <string name="NoDataWarning">No registered data. Remember to activate the GPS</string>
+
+    <string name="PopUpDurationTitle">DURATION</string>
+    <string name="PopUpIntervalTitle">INTERVALS</string>
+    <string name="PopUpDistanceTitle">DISTANCE</string>
+    <string name="PopUpAvgSpeedTitle">AVERAGE SPEED</string>
+    <string name="PopUpMaxSpeedTitle">MAXIMUM SPEED</string>
+    <string name="PopUpUnevennessTitle">UNEVENNESS</string>
+
+    <string name="textNull"></string>
+    <string name="textNoData">-</string>
+
+    <string name="medalDistanceDescription">Distance</string>
+    <string name="medalAvgSpeedDescription">Avg speed</string>
+    <string name="medalMaxSpeedDescription">Max speed</string>
+    <string name="parameter_start">0.0</string>
+    <string name="kms">KMs</string>
+    <string name="avg_speed">AVG SPEED</string>
+    <string name="km_h">KM/H</string>
+    <string name="current_speed">SPEED</string>
+    <string name="center_map">Center</string>
+    <string name="map_name">map</string>
+    <string name="run_with_intervals">Run with intervals</string>
+    <string name="intervals_duration">INTERVALS DURATION</string>
+    <string name="minimum">MIN.</string>
+    <string name="run">RUN</string>
+    <string name="walk">WALK</string>
+    <string name="duration">DURATION</string>
+    <string name="km">KM</string>
+    <string name="audio_settings">Audio settings</string>
+    <string name="remove">REMOVE</string>
+    <string name="round_placeholder">Round %d</string>
+
+    <string name="alertGPSTitle">Allow GPS access</string>
+    <string name="alertGPSDescription">If you want to know your run data, you need to allow GPS access</string>
+    <string name="cancelGPS">Cancel</string>
+    <string name="allowGPS">Allow</string>
+
+    <string name="alertPrefsTitle">Clear preferences</string>
+    <string name="alertPrefsDescription">Do you want to clear your preferences?</string>
+    <string name="cancelPrefs">Cancel</string>
+    <string name="removePrefs">Continue</string>
+    <string name="prefsCleared">All preferences have been cleared</string>
+    <string name="runRemoved">Run removed</string>
+
+    <string name="remaining_time_placeholder">-%s</string>
+    <string name="total_runs_placeholder">%1$d/%2$d</string>
+    <string name="percentage_placeholder">%d%%</string>
+    <string name="distance_percentage_placeholder">%1$s/%2$s km</string>
+    <string name="total_time_placeholder">Total time: %s</string>
+    <string name="alertLogoutTitle">Log out</string>
+    <string name="alertLogoutDescription">Do you want to log out?</string>
+    <string name="logoutOk">Log out</string>
+    <string name="image_saved_ok">Image has been saved</string>
+    <string name="image_save_error">Error saving image</string>
+    <string name="cam_perm_req">You need to allow camera permissions</string>
+    <string name="no_cam_advice">The device has no camera</string>
+    <string name="failed_init_cam">Failed initializing camera</string>
+
+    <string name="CardAvgSpeedTitle">AVG SPEED</string>
+    <string name="CardMaxSpeedTitle">MAX SPEED</string>
+    <string name="CardMedalDistance">KM [RP]</string>
+    <string name="CardMedalAvgSpeed">Max.S. [RP]</string>
+    <string name="CardMedalMaxSpeed">Avg.s. [RP]</string>
+
+    <string name="datePlaceHolder">%1$s.%2$s.%3$s</string>
+    <string name="image_uploaded_ok">The image was uploaded successfully</string>
+    <string name="remove_upper">REMOVE</string>
+    <string name="init_stop_watch_value">00:00:00</string>
+
+</resources>
