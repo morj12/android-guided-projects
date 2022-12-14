@@ -1,0 +1,30 @@
+package com.example.wildrunning.data
+
+data class Run(
+    var user: String? = null,
+    var date: String? = null,
+    var startTime: String? = null,
+    var sport: String? = null,
+    var locationEnabled: Boolean? = null,
+    var duration: String? = null,
+    var distance: Double? = null,
+    var avgSpeed: Double? = null,
+    var maxSpeed: Double? = null,
+    var minAltitude: Double? = null,
+    var maxAltitude: Double? = null,
+    var minLatitude: Double? = null,
+    var maxLatitude: Double? = null,
+    var minLongitude: Double? = null,
+    var maxLongitude: Double? = null,
+    var latitudeCenter: Double? = null,
+    var longitudeCenter: Double? = null,
+    var medalDistance: String? = null,
+    var medalAvgSpeed: String? = null,
+    var medalMaxSpeed: String? = null,
+    var intervalMode: Boolean? = null,
+    var intervalDuration: Int? = null,
+    var runningTime: String? = null,
+    var walkingTime: String? = null,
+    var photoNumber: Int? = null,
+    var lastImage: String? = null
+)
