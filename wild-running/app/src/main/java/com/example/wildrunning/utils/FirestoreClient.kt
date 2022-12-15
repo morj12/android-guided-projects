@@ -249,62 +249,43 @@ object FirestoreClient {
     /**
      * Saves finished run data in the database
      */
-    fun saveRunData(
-        collection: String,
-        id: String,
-        runDate: String,
-        runStartTime: String,
-        durationString: String,
-        dist: Double,
-        avgSp: Double,
-        maxSp: Double,
-        extrema: Extrema,
-        latitudeCenter: Double,
-        longitudeCenter: Double,
-        intervalModeEnabled: Boolean,
-        durationIntervalValue: Int,
-        runningTime: String,
-        walkingTime: String,
-        medalDistance: Records.RecordMedal,
-        medalAvgSpeed: Records.RecordMedal,
-        medalMaxSpeed: Records.RecordMedal
-    ) {
+    fun saveRunData(collection: String, run: Run) {
         val db = FirebaseFirestore.getInstance()
-        db.collection(collection).document(id).set(
+        db.collection(collection).document(run.user!!).set(
             mutableMapOf(
                 "user" to userEmail,
-                "date" to runDate,
-                "startTime" to runStartTime,
+                "date" to run.date,
+                "startTime" to run.startTime,
                 "sport" to selectedSport,
                 "locationEnabled" to locationEnabled,
-                "duration" to durationString,
-                "distance" to dist,
-                "avgSpeed" to avgSp,
-                "maxSpeed" to maxSp,
-                "minAltitude" to extrema.minAltitude,
-                "maxAltitude" to extrema.maxAltitude,
-                "minLatitude" to extrema.minLatitude,
-                "maxLatitude" to extrema.maxLatitude,
-                "minLongitude" to extrema.minLongitude,
-                "maxLongitude" to extrema.maxLongitude,
-                "latitudeCenter" to latitudeCenter,
-                "longitudeCenter" to longitudeCenter,
-                "medalDistance" to medalDistance,
-                "medalAvgSpeed" to medalAvgSpeed,
-                "medalMaxSpeed" to medalMaxSpeed,
+                "duration" to run.duration,
+                "distance" to run.distance,
+                "avgSpeed" to run.avgSpeed,
+                "maxSpeed" to run.maxSpeed,
+                "minAltitude" to run.minAltitude,
+                "maxAltitude" to run.maxAltitude,
+                "minLatitude" to run.minLatitude,
+                "maxLatitude" to run.maxLatitude,
+                "minLongitude" to run.minLongitude,
+                "maxLongitude" to run.maxLongitude,
+                "latitudeCenter" to run.latitudeCenter,
+                "longitudeCenter" to run.longitudeCenter,
+                "medalDistance" to run.medalDistance,
+                "medalAvgSpeed" to run.medalAvgSpeed,
+                "medalMaxSpeed" to run.medalMaxSpeed,
                 "photoNumber" to photoNumber,
                 "lastImage" to lastImage
             )
         )
 
-        if (intervalModeEnabled) {
-            db.collection(collection).document(id).update("intervalMode", true)
-            db.collection(collection).document(id)
-                .update("intervalDuration", durationIntervalValue)
-            db.collection(collection).document(id)
-                .update("runningTime", runningTime)
-            db.collection(collection).document(id)
-                .update("walkingTime", walkingTime)
+        if (run.intervalMode == true) {
+            db.collection(collection).document(run.user!!).update("intervalMode", true)
+            db.collection(collection).document(run.user!!)
+                .update("intervalDuration", run.intervalDuration)
+            db.collection(collection).document(run.user!!)
+                .update("runningTime", run.runningTime)
+            db.collection(collection).document(run.user!!)
+                .update("walkingTime", run.walkingTime)
         }
     }
 

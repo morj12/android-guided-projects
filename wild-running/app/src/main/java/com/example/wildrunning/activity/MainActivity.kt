@@ -955,15 +955,36 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val medalAvgSpeed = records.avgSpeedRecord
         val medalMaxSpeed = records.maxSpeedRecord
 
-        FirestoreClient.saveRunData(
-            collection, id, runDate, runStartTime,
-            durationString, dist, avgSp, maxSp, extrema, latitudeCenter, longitudeCenter,
-            binding.intervalModeSwitch.isChecked,
-            binding.durationIntervalNumberPicker.value,
-            binding.runningTimeTextView.text.toString(),
-            binding.walkingTimeTextView.text.toString(),
-            medalDistance, medalAvgSpeed, medalMaxSpeed
+        val run = Run(
+            user = id,
+            date = runDate,
+            startTime = runStartTime,
+            sport = selectedSport.name,
+            locationEnabled = locationEnabled,
+            duration = durationString,
+            distance = dist,
+            avgSpeed = avgSp,
+            maxSpeed = maxSp,
+            minAltitude = extrema.minAltitude,
+            maxAltitude = extrema.maxAltitude,
+            minLatitude = extrema.minLatitude,
+            maxLatitude = extrema.maxLatitude,
+            minLongitude = extrema.minLongitude,
+            maxLongitude = extrema.maxLongitude,
+            latitudeCenter = latitudeCenter,
+            longitudeCenter = longitudeCenter,
+            medalDistance = medalDistance.name,
+            medalAvgSpeed = medalAvgSpeed.name,
+            medalMaxSpeed = medalMaxSpeed.name,
+            intervalMode = binding.intervalModeSwitch.isChecked,
+            intervalDuration = binding.durationIntervalNumberPicker.value,
+            runningTime = binding.runningTimeTextView.text.toString(),
+            walkingTime = binding.walkingTimeTextView.text.toString(),
+            photoNumber = photoNumber,
+            lastImage = lastImage,
         )
+
+        FirestoreClient.saveRunData(collection, run)
     }
 
     private fun updateUserTotals() {
