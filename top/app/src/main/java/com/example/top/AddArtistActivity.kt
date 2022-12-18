@@ -145,14 +145,14 @@ class AddArtistActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListene
             artist.birthDate = artist.birthDate
 
             val intent = Intent()
-            intent.putExtra("name", artist.name)
-            intent.putExtra("surname", artist.surname)
-            intent.putExtra("height", artist.height)
-            intent.putExtra("birthplace", artist.birthPlace)
-            intent.putExtra("notes", artist.notes)
-            intent.putExtra("order", artist.order)
-            intent.putExtra("photourl", artist.photoUrl)
-            intent.putExtra("birthdate", artist.birthDate)
+            intent.putExtra(Artist.NAME, artist.name)
+            intent.putExtra(Artist.SURNAME, artist.surname)
+            intent.putExtra(Artist.HEIGHT, artist.height)
+            intent.putExtra(Artist.BIRTH_PLACE, artist.birthPlace)
+            intent.putExtra(Artist.NOTES, artist.notes)
+            intent.putExtra(Artist.ORDER, artist.order)
+            intent.putExtra(Artist.PHOTO_URL, artist.photoUrl)
+            intent.putExtra(Artist.BIRTH_DATE, artist.birthDate)
             setResult(RESULT_OK, intent)
             finish()
         }
@@ -165,7 +165,7 @@ class AddArtistActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListene
 
         val incorrectHeight = height.isEmpty()      // not null
                 || height.any { !it.isDigit() }     // not number
-                || height.toInt() <= 0               // negative number
+                || height.toInt() <= 0              // negative number
 
         if (incorrectHeight) {
             binding.etHeight.error = (getString(R.string.addArtist_error_minimumHeight))

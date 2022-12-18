@@ -108,14 +108,14 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
         if (resultCode == RESULT_OK && requestCode == 1) {
             val extras = data!!.extras
             val artist = Artist()
-            artist.name = extras?.getString("name")!!
-            artist.surname = extras.getString("surname")!!
-            artist.height = extras.getShort("height")
-            artist.birthPlace = extras.getString("birthplace")!!
-            artist.notes = extras.getString("notes")!!
-            artist.order = extras.getInt("order")
-            artist.photoUrl = extras.getString("photourl")!!
-            artist.birthDate = extras.getLong("birthdate")
+            artist.name = extras?.getString(Artist.NAME)!!
+            artist.surname = extras.getString(Artist.SURNAME)!!
+            artist.height = extras.getShort(Artist.HEIGHT)
+            artist.birthPlace = extras.getString(Artist.BIRTH_PLACE)!!
+            artist.notes = extras.getString(Artist.NOTES)!!
+            artist.order = extras.getInt(Artist.ORDER)
+            artist.photoUrl = extras.getString(Artist.PHOTO_URL)!!
+            artist.birthDate = extras.getLong(Artist.BIRTH_DATE)
 
             artistAdapter.add(artist)
         }
