@@ -12,7 +12,6 @@ import com.example.top.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), OnItemClickListener {
 
-    private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
     private lateinit var artistAdapter: ArtistAdapter
 
@@ -90,11 +89,20 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
     }
 
     override fun onItemClick(artist: Artist) {
-
+        val intent = Intent(this, DetailsActivity::class.java)
+        intent.putExtra(Artist.NAME, artist.name)
+        intent.putExtra(Artist.SURNAME, artist.surname)
+        intent.putExtra(Artist.HEIGHT, artist.height)
+        intent.putExtra(Artist.BIRTH_PLACE, artist.birthPlace)
+        intent.putExtra(Artist.NOTES, artist.notes)
+        intent.putExtra(Artist.ORDER, artist.order)
+        intent.putExtra(Artist.PHOTO_URL, artist.photoUrl)
+        intent.putExtra(Artist.BIRTH_DATE, artist.birthDate)
+        startActivity(intent)
     }
 
     override fun onLongItemClick(artist: Artist) {
-
+        println()
     }
 
     private fun onAddArtistClicked(view: View) {
