@@ -1,10 +1,12 @@
 package com.example.top
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.ui.AppBarConfiguration
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.top.databinding.ActivityMainBinding
 
@@ -20,11 +22,10 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
-
         configToolbar()
         configAdapter()
         configRecyclerView()
+        binding.fab.setOnClickListener(::onAddArtistClicked)
 
         generateArtists()
     }
@@ -94,6 +95,30 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
 
     override fun onLongItemClick(artist: Artist) {
 
+    }
+
+    private fun onAddArtistClicked(view: View) {
+        val intent = Intent(this, AddArtistActivity::class.java)
+        intent.putExtra(Artist.ORDER, artistAdapter.itemCount + 1)
+        startActivityForResult(intent, 1)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == RESULT_OK && requestCode == 1) {
+            val extras = data!!.extras
+            val artist = Artist()
+            artist.name = extras?.getString("name")!!
+            artist.surname = extras.getString("surname")!!
+            artist.height = extras.getShort("height")
+            artist.birthPlace = extras.getString("birthplace")!!
+            artist.notes = extras.getString("notes")!!
+            artist.order = extras.getInt("order")
+            artist.photoUrl = extras.getString("photourl")!!
+            artist.birthDate = extras.getLong("birthdate")
+
+            artistAdapter.add(artist)
+        }
     }
 
 }

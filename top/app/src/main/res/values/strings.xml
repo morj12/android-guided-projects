@@ -11,4 +11,14 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="artist_hint_name">Name</string>
     <string name="artist_hint_order">Order</string>
+    <string name="artist_hint_surname">Surname</string>
+    <string name="artist_hint_birthdate">Birth date</string>
+    <string name="artist_hint_height">Height (cm)</string>
+    <string name="artist_hint_birthplace">Birth place</string>
+    <string name="artist_hint_notes">Notes</string>
+    <string name="addArtist_dialogUrl_title">Add photo from URL</string>
+    <string name="label_dialog_data">Add</string>
+    <string name="label_dialog_cancel">Cancel</string>
+    <string name="addArtist_error_minimumHeight">This field is required and must be greater than 0</string>
+    <string name="addArtist_error_required">This field is required</string>
 </resources>

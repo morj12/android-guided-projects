@@ -1,13 +1,18 @@
 package com.example.top
 
 data class Artist(
-    val id: Long = 0,
-    val name: String = "",
-    val surname: String = "",
-    val birthDate: Long = 0,
-    val birthPlace: String= "",
-    val height: Short = 0,
-    val order: Int = 0,
-    val notes: String = "",
-    val photoUrl: String = ""
+    var id: Long = 0,
+    var name: String = "",
+    var surname: String = "",
+    var birthDate: Long = 0,
+    var birthPlace: String= "",
+    var height: Short = 0,
+    var order: Int = 0,
+    var notes: String = "",
+    var photoUrl: String = ""
 )
+{
+    companion object {
+        var ORDER = "order"
+    }
+}

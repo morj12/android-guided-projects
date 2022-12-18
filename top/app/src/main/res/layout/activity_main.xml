@@ -26,7 +26,7 @@
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/main.padding.small"
+        android:padding="@dimen/main_padding_small"
         tools:listitem="@layout/item_artist"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         />

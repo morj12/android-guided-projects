@@ -1,5 +1,9 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
-    <dimen name="main.padding.small">4dp</dimen>
-    <dimen name="img.item.size">80dp</dimen>
+    <dimen name="main_padding_small">4dp</dimen>
+    <dimen name="img_item_size">80dp</dimen>
+    <dimen name="app_bar_height">220dp</dimen>
+    <dimen name="img_view_margin">8dp</dimen>
+    <dimen name="imageView_inset">-4dp</dimen>
+    <dimen name="imageView_radius">18dp</dimen>
 </resources>
