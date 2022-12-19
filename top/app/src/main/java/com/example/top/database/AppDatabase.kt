@@ -1,9 +1,11 @@
-package com.example.top
+package com.example.top.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.top.database.artist.Artist
+import com.example.top.database.artist.ArtistDao
 
 @Database(entities = [Artist::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {

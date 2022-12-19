@@ -1,7 +1,6 @@
-package com.example.top
+package com.example.top.activity
 
 import android.app.DatePickerDialog
-import android.content.Intent
 import android.os.Bundle
 import android.widget.DatePicker
 import android.icu.util.Calendar
@@ -16,7 +15,12 @@ import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
+import com.example.top.R
+import com.example.top.database.artist.Artist
+import com.example.top.database.artist.ArtistRepository
 import com.example.top.databinding.ActivityDetailsBinding
+import com.example.top.util.ArtistValidator
+import com.example.top.util.Message
 import com.google.android.material.snackbar.Snackbar
 import java.text.SimpleDateFormat
 import java.util.*
@@ -37,13 +41,12 @@ class DetailsActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener 
         setContentView(binding.root)
 
         loadArtist()
-        configArtist()
-        configActionBar()
-        configImageView(artist.photoUrl)
-        configCalendar()
-        configFloatingActionButton()
-        binding.etBirthDateDetail.setOnTouchListener(::onBirthDateClicked)
-        configImageButtons()
+        initArtistInfo()
+        initActionBar()
+        initImageView(artist.photoUrl)
+        initCalendar()
+        initFloatingActionButton()
+        initImageButtons()
     }
 
     private fun loadArtist() {
@@ -51,7 +54,7 @@ class DetailsActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener 
         artist = ArtistRepository.getArtist(extras?.getLong(Artist.ID)!!)
     }
 
-    private fun configArtist() {
+    private fun initArtistInfo() {
         binding.etNameDetail.setText(artist.name)
         binding.etSurnameDetail.setText(artist.surname)
         binding.etBirthDateDetail.setText(
@@ -65,51 +68,7 @@ class DetailsActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener 
         binding.etNotesDetail.setText(artist.notes)
     }
 
-    private fun getAge(birthDate: Long): String {
-        val time = Calendar.getInstance().timeInMillis / 1000 - birthDate / 1000
-        val years = time.toFloat().roundToLong() / 31536000
-        return years.toString()
-    }
-
-    private fun configImageButtons() {
-        binding.imgDeleteDetail.setOnClickListener(::onPhotoOptionClicked)
-        binding.imgFromUrlDetail.setOnClickListener(::onPhotoOptionClicked)
-    }
-
-    private fun onPhotoOptionClicked(view: View) {
-        when (view.id) {
-            R.id.imgDeleteDetail -> {
-                AlertDialog.Builder(this)
-                    .setTitle(R.string.details_dialog_delete_title)
-                    .setMessage(getString(R.string.details_dialog_delete_message, artist.name))
-                    .setPositiveButton(R.string.details_dialog_delete_delete)
-                    {_, _ -> savePhotoUrlArtist("")}
-                    .setNegativeButton(R.string.label_dialog_cancel, null)
-                    .show()
-            }
-            R.id.imgFromUrlDetail -> {
-                val etPhotoUrl = EditText(this)
-                val builder = android.app.AlertDialog.Builder(this)
-                    .setTitle(R.string.addArtist_dialogUrl_title)
-                    .setPositiveButton(
-                        R.string.label_dialog_data
-                    ) { _, _ -> savePhotoUrlArtist(etPhotoUrl.text.toString().trim()) }
-                    .setNegativeButton(R.string.label_dialog_cancel) { _, _ -> }
-                builder.setView(etPhotoUrl)
-                builder.show()
-            }
-        }
-    }
-
-    private fun savePhotoUrlArtist(photoUrl: String) {
-        artist.photoUrl = photoUrl
-        ArtistRepository.updateArtist(artist)
-        configImageView(photoUrl)
-        showMessage(R.string.details_message_update_success)
-    }
-
-
-    private fun configActionBar() {
+    private fun initActionBar() {
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         configTitle()
@@ -119,7 +78,7 @@ class DetailsActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener 
         binding.toolbarLayout.title = "${artist.name} ${artist.surname}"
     }
 
-    private fun configImageView(url: String) {
+    private fun initImageView(url: String) {
         if (url != "") {
             val options = RequestOptions()
                 .also {
@@ -142,10 +101,23 @@ class DetailsActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener 
         artist.photoUrl = url
     }
 
-    private fun configFloatingActionButton() {
+    private fun initCalendar() {
+        calendar = Calendar.getInstance(Locale.ROOT)
+        binding.etBirthDateDetail.setOnTouchListener(::onBirthDateClicked)
+    }
+
+    private fun initFloatingActionButton() {
         binding.fab.setOnClickListener {
             if (isEditing) {
-                if (fieldsValidated()) {
+                if (ArtistValidator.validate(
+                        binding.etHeightDetail,
+                        (getString(R.string.addArtist_error_minimumHeight)),
+                        binding.etSurnameDetail,
+                        getString(R.string.addArtist_error_required),
+                        binding.etNameDetail,
+                        getString(R.string.addArtist_error_required)
+                    )
+                ) {
                     artist.name = binding.etNameDetail.text.toString().trim()
                     artist.surname = binding.etSurnameDetail.text.toString().trim()
                     artist.height = binding.etHeightDetail.text.toString().trim().toShort()
@@ -154,10 +126,10 @@ class DetailsActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener 
                     ArtistRepository.updateArtist(artist)
                     configTitle()
                     showMessage(R.string.details_message_update_success)
+                    binding.fab.setImageDrawable(getDrawable(R.drawable.ic_account_edit))
+                    enableUIElements(false)
+                    isEditing = false
                 }
-                binding.fab.setImageDrawable(getDrawable(R.drawable.ic_account_edit))
-                enableUIElements(false)
-                isEditing = false
             } else {
                 isEditing = true
                 binding.fab.setImageDrawable(getDrawable(R.drawable.ic_account_check))
@@ -166,38 +138,51 @@ class DetailsActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener 
         }
     }
 
-    private fun fieldsValidated(): Boolean {
-        var isValid = true
+    private fun initImageButtons() {
+        binding.imgDeleteDetail.setOnClickListener(::onPhotoOptionClicked)
+        binding.imgFromUrlDetail.setOnClickListener(::onPhotoOptionClicked)
+    }
 
-        val height = binding.etHeightDetail.text.toString()
+    private fun getAge(birthDate: Long): String {
+        val time = Calendar.getInstance().timeInMillis / 1000 - birthDate / 1000
+        val years = time.toFloat().roundToLong() / 31536000
+        return years.toString()
+    }
 
-        val incorrectHeight = height.isEmpty()      // not null
-                || height.any { !it.isDigit() }     // not number
-                || height.toInt() <= 0              // negative number
-
-        if (incorrectHeight) {
-            binding.etHeightDetail.error = (getString(R.string.addArtist_error_minimumHeight))
-            binding.etHeightDetail.requestFocus()
-            isValid = false
+    private fun onPhotoOptionClicked(view: View) {
+        when (view.id) {
+            R.id.imgDeleteDetail -> deleteImage()
+            R.id.imgFromUrlDetail -> loadImageFromUrl()
         }
+    }
 
-        val nullSurname = binding.etSurnameDetail.text.toString().trim().isEmpty()
+    private fun deleteImage() {
+        AlertDialog.Builder(this)
+            .setTitle(R.string.details_dialog_delete_title)
+            .setMessage(getString(R.string.details_dialog_delete_message, artist.name))
+            .setPositiveButton(R.string.details_dialog_delete_delete)
+            { _, _ -> savePhotoUrlArtist("") }
+            .setNegativeButton(R.string.label_dialog_cancel, null)
+            .show()
+    }
 
-        if (nullSurname) {
-            binding.etSurnameDetail.error = getString(R.string.addArtist_error_required)
-            binding.etSurnameDetail.requestFocus()
-            isValid = false
-        }
+    private fun loadImageFromUrl() {
+        val etPhotoUrl = EditText(this)
+        val builder = android.app.AlertDialog.Builder(this)
+            .setTitle(R.string.addArtist_dialogUrl_title)
+            .setPositiveButton(
+                R.string.label_dialog_data
+            ) { _, _ -> savePhotoUrlArtist(etPhotoUrl.text.toString().trim()) }
+            .setNegativeButton(R.string.label_dialog_cancel, null)
+        builder.setView(etPhotoUrl)
+        builder.show()
+    }
 
-        val nullName = binding.etNameDetail.text.toString().trim().isEmpty()
-
-        if (nullName) {
-            binding.etNameDetail.error = getString(R.string.addArtist_error_required)
-            binding.etNameDetail.requestFocus()
-            isValid = false
-        }
-
-        return isValid
+    private fun savePhotoUrlArtist(photoUrl: String) {
+        artist.photoUrl = photoUrl
+        ArtistRepository.updateArtist(artist)
+        initImageView(photoUrl)
+        Message.showMessage(binding.containerMain, R.string.details_message_update_success)
     }
 
     private fun enableUIElements(enable: Boolean) {
@@ -226,10 +211,6 @@ class DetailsActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener 
             }
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    private fun configCalendar() {
-        calendar = Calendar.getInstance(Locale.ROOT)
     }
 
     override fun onDateSet(datePicker: DatePicker?, year: Int, month: Int, day: Int) {

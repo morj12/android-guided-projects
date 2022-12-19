@@ -1,4 +1,4 @@
-package com.example.top
+package com.example.top.database.artist
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -19,13 +19,6 @@ data class Artist(
 {
     companion object {
         const val ID = "id"
-        const val NAME = "name"
-        const val SURNAME = "surname"
-        const val BIRTH_DATE = "birthDate"
-        const val BIRTH_PLACE = "birthPlace"
-        const val HEIGHT = "height"
         const val ORDER = "order"
-        const val NOTES = "notes"
-        const val PHOTO_URL = "photoUrl"
     }
 }

@@ -1,11 +1,11 @@
-package com.example.top
+package com.example.top.database.artist
 
 object ArtistRepository {
 
     private lateinit var artistDao: ArtistDao
 
     fun setDao(dao: ArtistDao) {
-        if (!::artistDao.isInitialized) artistDao = dao
+        if (!ArtistRepository::artistDao.isInitialized) artistDao = dao
     }
 
     fun getArtist(id: Long) = artistDao.get(id)

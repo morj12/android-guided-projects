@@ -1,4 +1,4 @@
-package com.example.top
+package com.example.top.database.artist
 
 import androidx.room.*
 

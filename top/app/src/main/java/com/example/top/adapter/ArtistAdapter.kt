@@ -1,4 +1,4 @@
-package com.example.top
+package com.example.top.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
+import com.example.top.R
+import com.example.top.database.artist.Artist
 import com.example.top.databinding.ItemArtistBinding
 
 class ArtistAdapter(private val listener: OnItemClickListener) :

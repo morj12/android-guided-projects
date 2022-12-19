@@ -1,60 +1,10 @@
-package com.example.top
+package com.example.top.util
 
-import android.content.Context
-import android.content.Intent
-import android.os.Bundle
-import android.os.Vibrator
-import androidx.appcompat.app.AppCompatActivity
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
-import androidx.appcompat.app.AlertDialog
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.top.databinding.ActivityMainBinding
-import com.google.android.material.snackbar.Snackbar
+import com.example.top.database.artist.Artist
 
-class MainActivity : AppCompatActivity(), OnItemClickListener {
+object DefaultArtistsProvider {
 
-    private lateinit var binding: ActivityMainBinding
-    private lateinit var adapter: ArtistAdapter
-
-    // TODO: extract commons
-    // TODO: refresh artist order on remove
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        configToolbar()
-        configAdapter()
-        configRecyclerView()
-        binding.fab.setOnClickListener(::onAddArtistClicked)
-        configDatabase()
-
-//        generateDefaultArtists()
-    }
-
-    private fun configToolbar() {
-        setSupportActionBar(binding.toolbar)
-    }
-
-    private fun configAdapter() {
-        adapter = ArtistAdapter(this)
-    }
-
-    private fun configRecyclerView() {
-        binding.recyclerView.layoutManager = LinearLayoutManager(this)
-        binding.recyclerView.adapter = adapter
-    }
-
-    private fun configDatabase() {
-        val artistDao = AppDatabase.getDatabase(this).artistDao()
-        ArtistRepository.setDao(artistDao)
-    }
-
-    private fun generateDefaultArtists() {
-        // TODO: move to another class
+    fun provideArtists(): MutableList<Artist> {
         val names = arrayOf("Rachel", "Mary Elizabeth", "Jessica", "Gal")
         val surnames = arrayOf("McAdams", "Winstead", "Chastain", "Gadot")
         val birthDates = longArrayOf(280108800000L, 470469600000L, 228031200000L, 483667200000L)
@@ -73,72 +23,23 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
             "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Gal_Gadot_%2835402074433%29.jpg/1024px-Gal_Gadot_%2835402074433%29.jpg"
         )
 
-        for (i in 0..3) {
-            val artist = Artist(
-                0,
-                names[i],
-                surnames[i],
-                birthDates[i],
-                birthPlaces[i],
-                heights[i],
-                i + 1, notes[i],
-                photoUrls[i]
+        val artists = mutableListOf<Artist>()
+        for (i in names.indices) {
+            artists.add(
+                Artist(
+                    0,
+                    names[i],
+                    surnames[i],
+                    birthDates[i],
+                    birthPlaces[i],
+                    heights[i],
+                    i + 1,
+                    notes[i],
+                    photoUrls[i]
+                )
             )
-            adapter.add(artist)
-
-            ArtistRepository.addArtist(artist)
         }
+
+        return artists
     }
-
-    override fun onResume() {
-        super.onResume()
-        adapter.artistList = getArtistsFromDB()
-        adapter.notifyDataSetChanged()
-    }
-
-    private fun getArtistsFromDB() = ArtistRepository.getAll().toMutableList()
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
-
-    override fun onItemClick(artist: Artist) {
-        val intent = Intent(this, DetailsActivity::class.java)
-        intent.putExtra(Artist.ID, artist.id)
-        startActivity(intent)
-    }
-
-    override fun onLongItemClick(artist: Artist) {
-        val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-        vibrator.vibrate(60)
-        AlertDialog.Builder(this)
-            .setTitle(R.string.main_dialog_delete_title)
-            .setMessage(getString(R.string.main_dialog_delete_message, artist.name))
-            .setPositiveButton(R.string.details_dialog_delete_delete) {_, _ ->
-                ArtistRepository.delete(artist)
-                adapter.remove(artist)
-                showMessage(R.string.main_dialog_delete_success)
-            }
-            .setNegativeButton(R.string.label_dialog_cancel, null)
-            .show()
-    }
-
-    private fun showMessage(message: Int) {
-        Snackbar.make(binding.containerMain, message, Snackbar.LENGTH_SHORT).show()
-    }
-
-    private fun onAddArtistClicked(view: View) {
-        val intent = Intent(this, AddArtistActivity::class.java)
-        intent.putExtra(Artist.ORDER, adapter.itemCount + 1)
-        startActivityForResult(intent, 1)
-    }
-
 }
