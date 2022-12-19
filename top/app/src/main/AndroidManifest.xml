@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -17,8 +18,8 @@
         <activity
             android:name=".DetailsActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity"
             android:label="@string/title_activity_details"
+            android:parentActivityName=".MainActivity"
             android:theme="@style/Theme.Top.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

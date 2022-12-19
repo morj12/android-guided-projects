@@ -1,20 +1,25 @@
 package com.example.top
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Vibrator
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.ui.AppBarConfiguration
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.top.databinding.ActivityMainBinding
+import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity(), OnItemClickListener {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var artistAdapter: ArtistAdapter
+    private lateinit var adapter: ArtistAdapter
 
+    // TODO: extract commons
+    // TODO: refresh artist order on remove
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -25,8 +30,9 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
         configAdapter()
         configRecyclerView()
         binding.fab.setOnClickListener(::onAddArtistClicked)
+        configDatabase()
 
-        generateArtists()
+//        generateDefaultArtists()
     }
 
     private fun configToolbar() {
@@ -34,15 +40,21 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
     }
 
     private fun configAdapter() {
-        artistAdapter = ArtistAdapter(this)
+        adapter = ArtistAdapter(this)
     }
 
     private fun configRecyclerView() {
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
-        binding.recyclerView.adapter = artistAdapter
+        binding.recyclerView.adapter = adapter
     }
 
-    private fun generateArtists() {
+    private fun configDatabase() {
+        val artistDao = AppDatabase.getDatabase(this).artistDao()
+        ArtistRepository.setDao(artistDao)
+    }
+
+    private fun generateDefaultArtists() {
+        // TODO: move to another class
         val names = arrayOf("Rachel", "Mary Elizabeth", "Jessica", "Gal")
         val surnames = arrayOf("McAdams", "Winstead", "Chastain", "Gadot")
         val birthDates = longArrayOf(280108800000L, 470469600000L, 228031200000L, 483667200000L)
@@ -60,21 +72,31 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
             "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/SDCC_2015_-_Jessica_Chastain_%2819544181630%29.jpg/1024px-SDCC_2015_-_Jessica_Chastain_%2819544181630%29.jpg",
             "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Gal_Gadot_%2835402074433%29.jpg/1024px-Gal_Gadot_%2835402074433%29.jpg"
         )
+
         for (i in 0..3) {
-            artistAdapter.add(
-                Artist(
-                    (i + 1).toLong(),
-                    names[i],
-                    surnames[i],
-                    birthDates[i],
-                    birthPlaces[i],
-                    heights[i],
-                    i + 1, notes[i],
-                    photoUrls[i]
-                )
+            val artist = Artist(
+                0,
+                names[i],
+                surnames[i],
+                birthDates[i],
+                birthPlaces[i],
+                heights[i],
+                i + 1, notes[i],
+                photoUrls[i]
             )
+            adapter.add(artist)
+
+            ArtistRepository.addArtist(artist)
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+        adapter.artistList = getArtistsFromDB()
+        adapter.notifyDataSetChanged()
+    }
+
+    private fun getArtistsFromDB() = ArtistRepository.getAll().toMutableList()
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
@@ -90,43 +112,33 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
 
     override fun onItemClick(artist: Artist) {
         val intent = Intent(this, DetailsActivity::class.java)
-        intent.putExtra(Artist.NAME, artist.name)
-        intent.putExtra(Artist.SURNAME, artist.surname)
-        intent.putExtra(Artist.HEIGHT, artist.height)
-        intent.putExtra(Artist.BIRTH_PLACE, artist.birthPlace)
-        intent.putExtra(Artist.NOTES, artist.notes)
-        intent.putExtra(Artist.ORDER, artist.order)
-        intent.putExtra(Artist.PHOTO_URL, artist.photoUrl)
-        intent.putExtra(Artist.BIRTH_DATE, artist.birthDate)
+        intent.putExtra(Artist.ID, artist.id)
         startActivity(intent)
     }
 
     override fun onLongItemClick(artist: Artist) {
-        println()
+        val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+        vibrator.vibrate(60)
+        AlertDialog.Builder(this)
+            .setTitle(R.string.main_dialog_delete_title)
+            .setMessage(getString(R.string.main_dialog_delete_message, artist.name))
+            .setPositiveButton(R.string.details_dialog_delete_delete) {_, _ ->
+                ArtistRepository.delete(artist)
+                adapter.remove(artist)
+                showMessage(R.string.main_dialog_delete_success)
+            }
+            .setNegativeButton(R.string.label_dialog_cancel, null)
+            .show()
+    }
+
+    private fun showMessage(message: Int) {
+        Snackbar.make(binding.containerMain, message, Snackbar.LENGTH_SHORT).show()
     }
 
     private fun onAddArtistClicked(view: View) {
         val intent = Intent(this, AddArtistActivity::class.java)
-        intent.putExtra(Artist.ORDER, artistAdapter.itemCount + 1)
+        intent.putExtra(Artist.ORDER, adapter.itemCount + 1)
         startActivityForResult(intent, 1)
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == RESULT_OK && requestCode == 1) {
-            val extras = data!!.extras
-            val artist = Artist()
-            artist.name = extras?.getString(Artist.NAME)!!
-            artist.surname = extras.getString(Artist.SURNAME)!!
-            artist.height = extras.getShort(Artist.HEIGHT)
-            artist.birthPlace = extras.getString(Artist.BIRTH_PLACE)!!
-            artist.notes = extras.getString(Artist.NOTES)!!
-            artist.order = extras.getInt(Artist.ORDER)
-            artist.photoUrl = extras.getString(Artist.PHOTO_URL)!!
-            artist.birthDate = extras.getLong(Artist.BIRTH_DATE)
-
-            artistAdapter.add(artist)
-        }
     }
 
 }

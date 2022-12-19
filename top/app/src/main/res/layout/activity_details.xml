@@ -20,6 +20,7 @@
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
+            app:expandedTitleTextAppearance="@style/TextAppearance.Design.CollapsingToolbar.Expanded.Shadow"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:toolbarId="@+id/toolbar">
 
@@ -32,27 +33,24 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/app_bar_height"
                     android:background="@android:color/darker_gray"
-                    android:src="@drawable/ic_photo_size_select_actual"/>
+                    android:src="@drawable/ic_photo_size_select_actual" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="?attr/actionBarSize">
+                    android:layout_marginTop="?attr/actionBarSize"
+                    android:orientation="horizontal">
 
                     <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/imgDeleteDetail"
                         style="@style/AppTheme.ImageViewButton"
-                        android:id="@+id/imgDelete"
-                        android:src="@drawable/ic_close_box"/>
+                        android:src="@drawable/ic_close_box" />
+
                     <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/imgFromUrlDetail"
                         style="@style/AppTheme.ImageViewButton"
-                        android:id="@+id/imgFromGallery"
-                        android:src="@drawable/ic_image"/>
-                    <androidx.appcompat.widget.AppCompatImageView
-                        style="@style/AppTheme.ImageViewButton"
-                        android:id="@+id/imgFromUrl"
-                        android:src="@drawable/ic_earth_box"/>
+                        android:src="@drawable/ic_earth_box" />
                 </LinearLayout>
             </FrameLayout>
 
@@ -71,118 +69,117 @@
         android:id="@+id/containerMain"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        >
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:focusableInTouchMode="true">
+            android:focusableInTouchMode="true"
+            android:orientation="vertical">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etNameDetail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/artist_hint_name"
-                    android:textColor="@color/black"
-                    android:inputType="textPersonName|textCapWords"
-                    android:maxLength="@integer/name_maxLength"
                     android:backgroundTint="@color/white"
-                    android:enabled="false"/>
+                    android:enabled="false"
+                    android:hint="@string/artist_hint_name"
+                    android:inputType="textPersonName|textCapWords"
+                    android:maxLength="@integer/name_maxLength" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etSurnameDetail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/artist_hint_surname"
-                    android:textColor="@color/black"
-                    android:inputType="textPersonName|textCapWords"
-                    android:maxLength="@integer/name_maxLength"
                     android:backgroundTint="@color/white"
-                    android:enabled="false"/>
+                    android:enabled="false"
+                    android:hint="@string/artist_hint_surname"
+                    android:inputType="textPersonName|textCapWords"
+                    android:maxLength="@integer/name_maxLength" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:baselineAligned="false">
+                android:baselineAligned="false"
+                android:orientation="horizontal">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="50">
+
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etBirthDateDetail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/artist_hint_birthdate"
-                        android:textColor="@color/black"
                         android:backgroundTint="@color/white"
                         android:enabled="false"
-                        android:focusableInTouchMode="false"/>
+                        android:focusableInTouchMode="false"
+                        android:hint="@string/artist_hint_birthdate" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="50">
+
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etAgeDetail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/artist_hint_age"
-                        android:textColor="@color/black"
-                        android:inputType="number"
                         android:backgroundTint="@color/white"
-                        android:maxLength="@integer/height_maxLength"
-                        android:enabled="false"/>
+                        android:enabled="false"
+                        android:hint="@string/artist_hint_age"
+                        android:inputType="number"
+                        android:maxLength="@integer/height_maxLength" />
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:baselineAligned="false">
+                android:baselineAligned="false"
+                android:orientation="horizontal">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="50">
+
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etHeightDetail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/artist_hint_height"
-                        android:textColor="@color/black"
                         android:backgroundTint="@color/white"
+                        android:enabled="false"
+                        android:hint="@string/artist_hint_height"
                         android:inputType="number"
-                        android:maxLength="@integer/height_maxLength"
-                        android:enabled="false"/>
+                        android:maxLength="@integer/height_maxLength" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="50">
+
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etOrderDetail"
                         android:layout_width="match_parent"
-                        android:textColor="@color/black"
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/white"
-                        android:hint="@string/artist_hint_order"
                         android:enabled="false"
-                        android:focusableInTouchMode="false"/>
+                        android:focusableInTouchMode="false"
+                        android:hint="@string/artist_hint_order" />
                 </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
@@ -190,32 +187,32 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etBirthPlaceDetail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
+                    android:backgroundTint="@color/white"
+                    android:enabled="false"
                     android:hint="@string/artist_hint_birthplace"
                     android:inputType="textAutoComplete"
-                    android:backgroundTint="@color/white"
-                    android:maxLength="@integer/birthplace_maxLength"
-                    android:enabled="false"/>
+                    android:maxLength="@integer/birthplace_maxLength" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etNotesDetail"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:hint="@string/artist_hint_notes"
-                    android:textColor="@color/black"
                     android:backgroundTint="@color/white"
+                    android:enabled="false"
                     android:gravity="top|start"
+                    android:hint="@string/artist_hint_notes"
                     android:inputType="textMultiLine"
-                    android:maxLength="@integer/notes_maxLength"
-                    android:enabled="false"/>
+                    android:maxLength="@integer/notes_maxLength" />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
@@ -227,9 +224,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/fab_margin"
-        app:layout_anchor="@id/app_bar"
-        app:layout_anchorGravity="bottom|end"
         android:src="@drawable/ic_account_edit"
-        android:tint="@android:color/white"/>
+        android:tint="@android:color/white"
+        app:layout_anchor="@id/app_bar"
+        app:layout_anchorGravity="bottom|end" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

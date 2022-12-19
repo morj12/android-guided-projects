@@ -12,6 +12,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.DatePicker
 import android.widget.EditText
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
@@ -40,17 +41,22 @@ class AddArtistActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListene
 
     private fun configImageButtons() {
         binding.imgFromUrl.setOnClickListener(::onImgButtonClicked)
-        binding.imgFromGallery.setOnClickListener(::onImgButtonClicked)
         binding.imgDeletePhoto.setOnClickListener(::onImgButtonClicked)
     }
 
     private fun onImgButtonClicked(view: View) {
         when (view.id) {
-            R.id.imgDeletePhoto -> println()
-            R.id.imgFromGallery -> println()
+            R.id.imgDeletePhoto -> {
+                androidx.appcompat.app.AlertDialog.Builder(this)
+                    .setTitle(R.string.details_dialog_delete_title)
+                    .setMessage(getString(R.string.details_dialog_delete_message, artist.name))
+                    .setPositiveButton(R.string.details_dialog_delete_delete)
+                    {_, _ -> configureView("")}
+                    .setNegativeButton(R.string.label_dialog_cancel, null)
+                    .show()
+            }
             R.id.imgFromUrl -> showAddPhotoDialog()
         }
-
     }
 
     private fun showAddPhotoDialog() {
@@ -71,10 +77,18 @@ class AddArtistActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListene
                 it.diskCacheStrategy(DiskCacheStrategy.ALL)
                 it.centerCrop()
             }
+
             Glide.with(this)
                 .load(url)
                 .apply(options)
-                .into(binding.imgPhoto)
+                .into(binding.imgPhotoArtist)
+        } else {
+            binding.imgPhotoArtist.setImageDrawable(
+                ContextCompat.getDrawable(
+                    this,
+                    R.drawable.ic_photo_size_select_actual
+                )
+            )
         }
 
         artist.photoUrl = url
@@ -87,7 +101,7 @@ class AddArtistActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListene
     }
 
     private fun configArtist(intent: Intent) {
-        artist = Artist()
+        artist = Artist(0)
         artist.birthDate = System.currentTimeMillis()
         artist.order = intent.getIntExtra(Artist.ORDER, 0)
     }
@@ -140,20 +154,7 @@ class AddArtistActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListene
             artist.height = binding.etHeight.text.toString().trim().toShort()
             artist.birthPlace = binding.etBirthPlace.text.toString().trim()
             artist.notes = binding.notes.text.toString().trim()
-            artist.order = artist.order
-            artist.photoUrl = artist.photoUrl
-            artist.birthDate = artist.birthDate
-
-            val intent = Intent()
-            intent.putExtra(Artist.NAME, artist.name)
-            intent.putExtra(Artist.SURNAME, artist.surname)
-            intent.putExtra(Artist.HEIGHT, artist.height)
-            intent.putExtra(Artist.BIRTH_PLACE, artist.birthPlace)
-            intent.putExtra(Artist.NOTES, artist.notes)
-            intent.putExtra(Artist.ORDER, artist.order)
-            intent.putExtra(Artist.PHOTO_URL, artist.photoUrl)
-            intent.putExtra(Artist.BIRTH_DATE, artist.birthDate)
-            setResult(RESULT_OK, intent)
+            ArtistRepository.addArtist(artist)
             finish()
         }
     }
@@ -193,9 +194,6 @@ class AddArtistActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListene
     }
 
     override fun onDateSet(datePicker: DatePicker?, year: Int, month: Int, day: Int) {
-        /**
-         * Called twice for some reason
-         */
         calendar.timeInMillis = System.currentTimeMillis()
         calendar.set(Calendar.YEAR, year)
         calendar.set(Calendar.MONTH, month)

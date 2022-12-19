@@ -17,7 +17,7 @@
             android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/imgPhoto"
+                android:id="@+id/imgPhotoArtist"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/app_bar_height"
                 android:background="@android:color/darker_gray"
@@ -32,11 +32,6 @@
                     android:id="@+id/imgDeletePhoto"
                     style="@style/appTheme_ImageViewButton"
                     android:src="@drawable/ic_close_box"
-                    />
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/imgFromGallery"
-                    style="@style/appTheme_ImageViewButton"
-                    android:src="@drawable/ic_image"
                     />
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/imgFromUrl"

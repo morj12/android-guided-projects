@@ -15,7 +15,7 @@ class ArtistAdapter(private val listener: OnItemClickListener) :
     RecyclerView.Adapter<ArtistAdapter.ViewHolder>() {
 
     private lateinit var context: Context
-    private var artistList = mutableListOf<Artist>()
+    var artistList = mutableListOf<Artist>()
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -40,9 +40,9 @@ class ArtistAdapter(private val listener: OnItemClickListener) :
             Glide.with(context)
                 .load(artist.photoUrl)
                 .apply(options)
-                .into(holder.binding.imgPhoto)
+                .into(holder.binding.imgIcon)
         } else {
-            holder.binding.imgPhoto.setImageDrawable(
+            holder.binding.imgIcon.setImageDrawable(
                 ContextCompat.getDrawable(
                     context,
                     R.drawable.ic_baseline_account_box
@@ -57,6 +57,13 @@ class ArtistAdapter(private val listener: OnItemClickListener) :
         if (!artistList.contains(artist)) {
             artistList.add(artist)
             notifyItemInserted(artistList.size - 1)
+        }
+    }
+
+    fun remove(artist: Artist) {
+        if (artistList.contains(artist)) {
+            artistList.remove(artist)
+            notifyDataSetChanged()
         }
     }
 

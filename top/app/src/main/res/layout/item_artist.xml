@@ -12,7 +12,7 @@
         android:background="?attr/selectableItemBackgroundBorderless">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/imgPhoto"
+            android:id="@+id/imgIcon"
             android:layout_width="@dimen/img_item_size"
             android:layout_height="@dimen/img_item_size"
             android:src="@drawable/ic_baseline_account_box"
@@ -28,7 +28,7 @@
             android:maxLines="2"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:layout_margin="@dimen/main_padding_small"
-            android:layout_toEndOf="@id/imgPhoto"
+            android:layout_toEndOf="@id/imgIcon"
             android:layout_toStartOf="@+id/tvOrder"
             android:layout_centerVertical="true"
             />
