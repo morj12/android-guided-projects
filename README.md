@@ -27,7 +27,7 @@ Sports related application which allows you to track the distance and the path o
 
 ### Description
 
-Simple chess game where you need to move the knight visiting each square exactly once.
+chess based game where you need to move the knight visiting each square exactly once.
 
 ### Technology
 
@@ -40,7 +40,7 @@ Simple chess game where you need to move the knight visiting each square exactly
 
 ### Description
 
-Simple application which main purpose is to learn how RecyclerView adapters work.
+Application which main purpose is to learn how RecyclerView adapters work.
 
 ### Technology
 
@@ -54,9 +54,10 @@ Simple application which main purpose is to learn how RecyclerView adapters work
 
 ### Description
 
-An application which shows a list of actors where you can edit them, remove them or add new elements.
+Application which shows a list of actors where you can edit them, remove them or add new elements.
 
 ### Technology
 
 - RecyclerView + Adapter
 - Room
+- Activities interaction and intents
