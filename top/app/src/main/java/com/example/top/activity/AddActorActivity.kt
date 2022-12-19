@@ -17,27 +17,27 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.example.top.R
-import com.example.top.database.artist.Artist
-import com.example.top.database.artist.ArtistRepository
-import com.example.top.databinding.ActivityAddArtistBinding
-import com.example.top.util.ArtistValidator
+import com.example.top.database.actor.Actor
+import com.example.top.database.actor.ActorRepository
+import com.example.top.databinding.ActivityAddActorBinding
+import com.example.top.util.ActorValidator
 import java.text.SimpleDateFormat
 import java.util.*
 
-class AddArtistActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
+class AddActorActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
 
-    private lateinit var binding: ActivityAddArtistBinding
-    private lateinit var artist: Artist
+    private lateinit var binding: ActivityAddActorBinding
+    private lateinit var actor: Actor
     private lateinit var calendar: Calendar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityAddArtistBinding.inflate(layoutInflater)
+        binding = ActivityAddActorBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.etName.requestFocus()
         initActionBar()
-        initArtist(intent)
+        initActor(intent)
         initCalendar()
         initImageListeners()
     }
@@ -45,10 +45,10 @@ class AddArtistActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListene
     private fun initActionBar() =
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-    private fun initArtist(intent: Intent) {
-        artist = Artist(0)
-        artist.birthDate = System.currentTimeMillis()
-        artist.order = intent.getIntExtra(Artist.ORDER, 0)
+    private fun initActor(intent: Intent) {
+        actor = Actor(0)
+        actor.birthDate = System.currentTimeMillis()
+        actor.order = intent.getIntExtra(Actor.ORDER, 0)
     }
 
     private fun initCalendar() {
@@ -77,7 +77,7 @@ class AddArtistActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListene
     private fun deletePhoto() {
         AlertDialog.Builder(this)
             .setTitle(R.string.details_dialog_delete_title)
-            .setMessage(getString(R.string.details_dialog_delete_message, artist.name))
+            .setMessage(getString(R.string.details_dialog_delete_message, actor.name))
             .setPositiveButton(R.string.details_dialog_delete_delete)
             { _, _ -> initImageView("") }
             .setNegativeButton(R.string.label_dialog_cancel, null)
@@ -87,7 +87,7 @@ class AddArtistActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListene
     private fun showAddPhotoDialog() {
         val etPhotoUrl = EditText(this)
         val builder = AlertDialog.Builder(this)
-            .setTitle(R.string.addArtist_dialogUrl_title)
+            .setTitle(R.string.addActor_dialogUrl_title)
             .setPositiveButton(
                 R.string.label_dialog_data
             ) { _, _ -> initImageView(etPhotoUrl.text.toString().trim()) }
@@ -105,16 +105,16 @@ class AddArtistActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListene
             Glide.with(this)
                 .load(url)
                 .apply(options)
-                .into(binding.imgPhotoArtist)
+                .into(binding.imgPhotoActor)
         } else {
-            binding.imgPhotoArtist.setImageDrawable(
+            binding.imgPhotoActor.setImageDrawable(
                 ContextCompat.getDrawable(
                     this,
                     R.drawable.ic_photo_size_select_actual
                 )
             )
         }
-        artist.photoUrl = url
+        actor.photoUrl = url
     }
 
     private fun onBirthDateTouched(view: View, motionEvent: MotionEvent): Boolean {
@@ -122,7 +122,7 @@ class AddArtistActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListene
             val selectorDate = DialogSelectorDate()
             selectorDate.listener = this
             val args = Bundle()
-            args.putLong(DialogSelectorDate.DATE, artist.birthDate)
+            args.putLong(DialogSelectorDate.DATE, actor.birthDate)
             selectorDate.arguments = args
             selectorDate.show(fragmentManager, DialogSelectorDate.SELECTED_DATE)
         }
@@ -135,7 +135,7 @@ class AddArtistActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListene
             true
         }
         R.id.action_save -> {
-            saveArtist()
+            saveActor()
             true
         }
         else -> super.onOptionsItemSelected(item)
@@ -146,22 +146,22 @@ class AddArtistActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListene
         return super.onCreateOptionsMenu(menu)
     }
 
-    private fun saveArtist() {
-        if (ArtistValidator.validate(
+    private fun saveActor() {
+        if (ActorValidator.validate(
                 binding.etHeight,
-                (getString(R.string.addArtist_error_minimumHeight)),
+                (getString(R.string.addActor_error_minimumHeight)),
                 binding.etSurname,
-                getString(R.string.addArtist_error_required),
+                getString(R.string.addActor_error_required),
                 binding.etName,
-                getString(R.string.addArtist_error_required)
+                getString(R.string.addActor_error_required)
             )
         ) {
-            artist.name = binding.etName.text.toString().trim()
-            artist.surname = binding.etSurname.text.toString().trim()
-            artist.height = binding.etHeight.text.toString().trim().toShort()
-            artist.birthPlace = binding.etBirthPlace.text.toString().trim()
-            artist.notes = binding.notes.text.toString().trim()
-            ArtistRepository.addArtist(artist)
+            actor.name = binding.etName.text.toString().trim()
+            actor.surname = binding.etSurname.text.toString().trim()
+            actor.height = binding.etHeight.text.toString().trim().toShort()
+            actor.birthPlace = binding.etBirthPlace.text.toString().trim()
+            actor.notes = binding.notes.text.toString().trim()
+            ActorRepository.addActor(actor)
             finish()
         }
     }
@@ -177,6 +177,6 @@ class AddArtistActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListene
                 Locale.ROOT
             ).format(calendar.timeInMillis)
         )
-        artist.birthDate = calendar.timeInMillis
+        actor.birthDate = calendar.timeInMillis
     }
 }

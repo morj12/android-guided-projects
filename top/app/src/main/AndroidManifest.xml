@@ -26,7 +26,7 @@
                 android:value="com.example.top.activity.MainActivity" />
         </activity>
         <activity
-            android:name=".activity.AddArtistActivity"
+            android:name=".activity.AddActorActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

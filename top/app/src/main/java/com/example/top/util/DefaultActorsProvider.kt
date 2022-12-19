@@ -1,10 +1,10 @@
 package com.example.top.util
 
-import com.example.top.database.artist.Artist
+import com.example.top.database.actor.Actor
 
-object DefaultArtistsProvider {
+object DefaultActorsProvider {
 
-    fun provideArtists(): MutableList<Artist> {
+    fun provideActors(): MutableList<Actor> {
         val names = arrayOf("Rachel", "Mary Elizabeth", "Jessica", "Gal")
         val surnames = arrayOf("McAdams", "Winstead", "Chastain", "Gadot")
         val birthDates = longArrayOf(280108800000L, 470469600000L, 228031200000L, 483667200000L)
@@ -23,10 +23,10 @@ object DefaultArtistsProvider {
             "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Gal_Gadot_%2835402074433%29.jpg/1024px-Gal_Gadot_%2835402074433%29.jpg"
         )
 
-        val artists = mutableListOf<Artist>()
+        val actors = mutableListOf<Actor>()
         for (i in names.indices) {
-            artists.add(
-                Artist(
+            actors.add(
+                Actor(
                     0,
                     names[i],
                     surnames[i],
@@ -40,6 +40,6 @@ object DefaultArtistsProvider {
             )
         }
 
-        return artists
+        return actors
     }
 }

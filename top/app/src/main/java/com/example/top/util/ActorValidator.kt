@@ -2,7 +2,7 @@ package com.example.top.util
 
 import com.google.android.material.textfield.TextInputEditText
 
-object ArtistValidator {
+object ActorValidator {
 
     fun validate(
         heightView: TextInputEditText,

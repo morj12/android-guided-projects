@@ -1,8 +1,8 @@
 package com.example.top.adapter
 
-import com.example.top.database.artist.Artist
+import com.example.top.database.actor.Actor
 
 interface OnItemClickListener {
-    fun onItemClick(artist: Artist)
-    fun onLongItemClick(artist: Artist)
+    fun onItemClick(actor: Actor)
+    fun onLongItemClick(actor: Actor)
 }

@@ -27,7 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/main_padding_small"
-        tools:listitem="@layout/item_artist"
+        tools:listitem="@layout/item_actor"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         />
 

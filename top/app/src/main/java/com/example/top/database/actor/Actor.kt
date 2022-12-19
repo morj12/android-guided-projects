@@ -1,11 +1,11 @@
-package com.example.top.database.artist
+package com.example.top.database.actor
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class Artist(
+data class Actor(
     @PrimaryKey(autoGenerate = true) var id: Long,
     @ColumnInfo(name = "name") var name: String = "",
     @ColumnInfo(name = "surname") var surname: String = "",

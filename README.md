@@ -48,3 +48,15 @@ Simple application which main purpose is to learn how RecyclerView adapters work
 - RecyclerView
 - Adapter, ListAdapter
 
+## top
+
+#### Guided by [Android: Fundamentos para crear tus primeras apps de calidad](https://www.udemy.com/course/fundamentos-de-android-para-crear-apps-de-calidad/)
+
+### Description
+
+An application which shows a list of actors where you can edit them, remove them or add new elements.
+
+### Technology
+
+- RecyclerView + Adapter
+- Room

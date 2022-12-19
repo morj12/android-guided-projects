@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    tools:context=".activity.AddArtistActivity"
+    tools:context=".activity.AddActorActivity"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <LinearLayout
@@ -17,7 +17,7 @@
             android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/imgPhotoArtist"
+                android:id="@+id/img_photo_actor"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/app_bar_height"
                 android:background="@android:color/darker_gray"
@@ -48,7 +48,7 @@
                 android:id="@+id/etName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/artist_hint_name"
+                android:hint="@string/actor_hint_name"
                 android:inputType="textPersonName|textCapWords"
                 android:maxLength="@integer/name_maxLength"
                 />
@@ -61,7 +61,7 @@
                 android:id="@+id/etSurname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/artist_hint_surname"
+                android:hint="@string/actor_hint_surname"
                 android:inputType="textPersonName|textCapWords"
                 android:maxLength="@integer/name_maxLength"
                 />
@@ -81,7 +81,7 @@
                     android:id="@+id/etBirthdate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/artist_hint_birthdate"/>
+                    android:hint="@string/actor_hint_birthdate"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -92,7 +92,7 @@
                     android:id="@+id/etHeight"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/artist_hint_height"
+                    android:hint="@string/actor_hint_height"
                     android:inputType="number"
                     android:maxLength="@integer/height_maxLength"/>
             </com.google.android.material.textfield.TextInputLayout>
@@ -106,7 +106,7 @@
                 android:id="@+id/etBirthPlace"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/artist_hint_birthplace"
+                android:hint="@string/actor_hint_birthplace"
                 android:inputType="textAutoComplete"
                 android:maxLength="@integer/birthplace_maxLength"/>
         </com.google.android.material.textfield.TextInputLayout>
@@ -118,7 +118,7 @@
                 android:id="@+id/notes"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="@string/artist_hint_notes"
+                android:hint="@string/actor_hint_notes"
                 android:inputType="textMultiLine"
                 android:gravity="top|start"
                 android:maxLength="@integer/notes_maxLength"/>

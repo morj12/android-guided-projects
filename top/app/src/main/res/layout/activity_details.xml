@@ -87,7 +87,7 @@
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/white"
                     android:enabled="false"
-                    android:hint="@string/artist_hint_name"
+                    android:hint="@string/actor_hint_name"
                     android:inputType="textPersonName|textCapWords"
                     android:maxLength="@integer/name_maxLength" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -102,7 +102,7 @@
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/white"
                     android:enabled="false"
-                    android:hint="@string/artist_hint_surname"
+                    android:hint="@string/actor_hint_surname"
                     android:inputType="textPersonName|textCapWords"
                     android:maxLength="@integer/name_maxLength" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -125,7 +125,7 @@
                         android:backgroundTint="@color/white"
                         android:enabled="false"
                         android:focusableInTouchMode="false"
-                        android:hint="@string/artist_hint_birthdate" />
+                        android:hint="@string/actor_hint_birthdate" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -139,7 +139,7 @@
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/white"
                         android:enabled="false"
-                        android:hint="@string/artist_hint_age"
+                        android:hint="@string/actor_hint_age"
                         android:inputType="number"
                         android:maxLength="@integer/height_maxLength" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -162,7 +162,7 @@
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/white"
                         android:enabled="false"
-                        android:hint="@string/artist_hint_height"
+                        android:hint="@string/actor_hint_height"
                         android:inputType="number"
                         android:maxLength="@integer/height_maxLength" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -179,7 +179,7 @@
                         android:backgroundTint="@color/white"
                         android:enabled="false"
                         android:focusableInTouchMode="false"
-                        android:hint="@string/artist_hint_order" />
+                        android:hint="@string/actor_hint_order" />
                 </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
@@ -194,7 +194,7 @@
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/white"
                     android:enabled="false"
-                    android:hint="@string/artist_hint_birthplace"
+                    android:hint="@string/actor_hint_birthplace"
                     android:inputType="textAutoComplete"
                     android:maxLength="@integer/birthplace_maxLength" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -210,7 +210,7 @@
                     android:backgroundTint="@color/white"
                     android:enabled="false"
                     android:gravity="top|start"
-                    android:hint="@string/artist_hint_notes"
+                    android:hint="@string/actor_hint_notes"
                     android:inputType="textMultiLine"
                     android:maxLength="@integer/notes_maxLength" />
             </com.google.android.material.textfield.TextInputLayout>

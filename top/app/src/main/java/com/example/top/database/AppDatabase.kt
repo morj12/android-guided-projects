@@ -4,12 +4,12 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.top.database.artist.Artist
-import com.example.top.database.artist.ArtistDao
+import com.example.top.database.actor.Actor
+import com.example.top.database.actor.ActorDao
 
-@Database(entities = [Artist::class], version = 1)
+@Database(entities = [Actor::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun artistDao(): ArtistDao
+    abstract fun actorDao(): ActorDao
 
     companion object {
         @Volatile
