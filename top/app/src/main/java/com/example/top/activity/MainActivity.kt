@@ -2,10 +2,7 @@ package com.example.top.activity
 
 import android.content.Context
 import android.content.Intent
-import android.os.Build
-import android.os.Bundle
-import android.os.VibrationEffect
-import android.os.Vibrator
+import android.os.*
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
@@ -20,11 +17,14 @@ import com.example.top.database.actor.ActorRepository
 import com.example.top.databinding.ActivityMainBinding
 import com.example.top.util.DefaultActorsProvider
 import com.example.top.util.Message
+import java.util.concurrent.Executors
 
 class MainActivity : AppCompatActivity(), OnItemClickListener {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var adapter: ActorAdapter
+
+    private var executor = Executors.newSingleThreadExecutor()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,11 +41,11 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
 //        initDefaultActors()
     }
 
-    private fun initDefaultActors() =
-        DefaultActorsProvider.provideActors().forEach {
-            adapter.add(it)
-            ActorRepository.addActor(it)
-        }
+    private fun initDefaultActors() {
+        DefaultActorsProvider.provideActors().forEach(adapter::add)
+        executor.execute { ActorRepository.addAll(adapter.actorList) }
+    }
+
 
     private fun initToolbar() = setSupportActionBar(binding.toolbar)
 
@@ -73,8 +73,12 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
 
     override fun onResume() {
         super.onResume()
-        adapter.actorList = getActorsFromDB()
-        adapter.notifyDataSetChanged()
+        executor.execute {
+            adapter.actorList = getActorsFromDB()
+            Handler(Looper.getMainLooper()).post {
+                adapter.notifyDataSetChanged()
+            }
+        }
     }
 
     private fun getActorsFromDB() = ActorRepository.getAll().toMutableList()
@@ -112,9 +116,16 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
             .setTitle(R.string.main_dialog_delete_title)
             .setMessage(getString(R.string.main_dialog_delete_message, actor.name))
             .setPositiveButton(R.string.details_dialog_delete_delete) { _, _ ->
-                ActorRepository.delete(actor)
-                adapter.remove(actor)
-                Message.showMessage(binding.containerMain, R.string.main_dialog_delete_success)
+                executor.execute {
+                    ActorRepository.delete(actor)
+                    Handler(Looper.getMainLooper()).post {
+                        adapter.remove(actor)
+                        Message.showMessage(
+                            binding.containerMain,
+                            R.string.main_dialog_delete_success
+                        )
+                    }
+                }
             }
             .setNegativeButton(R.string.label_dialog_cancel, null)
             .show()

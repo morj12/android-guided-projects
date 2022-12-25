@@ -6,6 +6,8 @@ import android.content.Intent
 import android.icu.util.Calendar
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.Menu
 import android.view.MenuItem
 import android.view.MotionEvent
@@ -23,12 +25,15 @@ import com.example.top.databinding.ActivityAddActorBinding
 import com.example.top.util.ActorValidator
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.concurrent.Executors
 
 class AddActorActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
 
     private lateinit var binding: ActivityAddActorBinding
     private lateinit var actor: Actor
     private lateinit var calendar: Calendar
+
+    private var executor = Executors.newSingleThreadExecutor()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -161,8 +166,13 @@ class AddActorActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener
             actor.height = binding.etHeight.text.toString().trim().toShort()
             actor.birthPlace = binding.etBirthPlace.text.toString().trim()
             actor.notes = binding.notes.text.toString().trim()
-            ActorRepository.addActor(actor)
-            finish()
+
+            executor.execute {
+                ActorRepository.addActor(actor)
+                Handler(Looper.getMainLooper()).post {
+                    finish()
+                }
+            }
         }
     }
 

@@ -4,6 +4,8 @@ import android.app.DatePickerDialog
 import android.os.Bundle
 import android.widget.DatePicker
 import android.icu.util.Calendar
+import android.os.Handler
+import android.os.Looper
 import android.view.Menu
 import android.view.MenuItem
 import android.view.MotionEvent
@@ -24,6 +26,7 @@ import com.example.top.util.Message
 import com.google.android.material.snackbar.Snackbar
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.concurrent.Executors
 import kotlin.math.roundToLong
 
 class DetailsActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
@@ -33,6 +36,8 @@ class DetailsActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener 
     private lateinit var calendar: Calendar
     private lateinit var menuItem: MenuItem
 
+    private var executor = Executors.newSingleThreadExecutor()
+
     private var isEditing = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,13 +45,17 @@ class DetailsActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener 
         binding = ActivityDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        loadActor()
-        initActorInfo()
-        initActionBar()
-        initImageView(actor.photoUrl)
-        initCalendar()
-        initFloatingActionButton()
-        initImageButtons()
+        executor.execute {
+            loadActor()
+            Handler(Looper.getMainLooper()).post {
+                initActorInfo()
+                initActionBar()
+                initImageView(actor.photoUrl)
+                initCalendar()
+                initFloatingActionButton()
+                initImageButtons()
+            }
+        }
     }
 
     private fun loadActor() {
@@ -123,12 +132,17 @@ class DetailsActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener 
                     actor.height = binding.etHeightDetail.text.toString().trim().toShort()
                     actor.birthPlace = binding.etBirthPlaceDetail.text.toString().trim()
                     actor.notes = binding.etNotesDetail.text.toString().trim()
-                    ActorRepository.updateActor(actor)
-                    configTitle()
-                    showMessage(R.string.details_message_update_success)
-                    binding.fab.setImageDrawable(getDrawable(R.drawable.ic_account_edit))
-                    enableUIElements(false)
-                    isEditing = false
+
+                    executor.execute {
+                        ActorRepository.updateActor(actor)
+                        Handler(Looper.getMainLooper()).post {
+                            configTitle()
+                            showMessage(R.string.details_message_update_success)
+                            binding.fab.setImageDrawable(getDrawable(R.drawable.ic_account_edit))
+                            enableUIElements(false)
+                            isEditing = false
+                        }
+                    }
                 }
             } else {
                 isEditing = true
@@ -180,9 +194,13 @@ class DetailsActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener 
 
     private fun savePhotoUrlActor(photoUrl: String) {
         actor.photoUrl = photoUrl
-        ActorRepository.updateActor(actor)
-        initImageView(photoUrl)
-        Message.showMessage(binding.containerMain, R.string.details_message_update_success)
+        executor.execute {
+            ActorRepository.updateActor(actor)
+            Handler(Looper.getMainLooper()).post {
+                initImageView(photoUrl)
+                Message.showMessage(binding.containerMain, R.string.details_message_update_success)
+            }
+        }
     }
 
     private fun enableUIElements(enable: Boolean) {

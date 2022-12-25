@@ -14,6 +14,8 @@ object ActorRepository {
 
     fun addActor(actor: Actor) = actorDao.insert(actor)
 
+    fun addAll(actors: List<Actor>) = actorDao.insertAll(actors)
+
     fun updateActor(actor: Actor) = actorDao.update(actor)
 
     fun delete(actor: Actor) = actorDao.delete(actor)
