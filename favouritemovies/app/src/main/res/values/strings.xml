@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">favourite-movies</string>
     <string name="action_settings">Settings</string>
+    <string name="hint_name">Name</string>
+    <string name="hint_description">Description</string>
+    <string name="bt_okay_text">Okay</string>
 </resources>

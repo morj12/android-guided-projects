@@ -28,7 +28,7 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
         return genreMovies
     }
 
-    fun addNewMovie(movie: Movie) {
+    fun addMovie(movie: Movie) {
         MovieRepository.insertMovie(movie)
     }
 
