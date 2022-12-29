@@ -8,7 +8,7 @@
 
 Sports related application which allows you to track the distance and the path of your run (or bike ride). It stores and analyzes your runs data, calculates your records, and allows you to take a photo of your run.
 
-### Technology
+### Technology and purpose
 
 - Activities interaction and intents
 - Firebase services:
@@ -27,11 +27,11 @@ Sports related application which allows you to track the distance and the path o
 
 ### Description
 
-chess based game where you need to move the knight visiting each square exactly once.
+Chess based game where you need to move the knight visiting each square exactly once.
 
-### Technology
+### Technology and purpose
 
-- Basics
+- Turn-based game
 - Create views programmatically
 
 ## sports
@@ -42,11 +42,10 @@ chess based game where you need to move the knight visiting each square exactly 
 
 Application which main purpose is to learn how RecyclerView adapters work.
 
-### Technology
+### Technology and purpose
 
-- Basics
-- RecyclerView
-- Adapter, ListAdapter
+- Use of RecyclerView and two types of adapters
+	- Adapter, ListAdapter
 
 ## top
 
@@ -56,8 +55,58 @@ Application which main purpose is to learn how RecyclerView adapters work.
 
 Application which shows a list of actors where you can edit them, remove them or add new elements.
 
-### Technology
+### Technology and purpose
 
 - RecyclerView + Adapter
 - Room
 - Activities interaction and intents
+
+##  soccerquiz
+
+#### Guided by [Android разработка - с нуля до профессионала. Полный курс](https://www.udemy.com/course/android-kak-po-notam-a/)
+
+### Description
+
+Application which contains a simple quiz of three random questions about soccer.
+
+### Technology and purpose
+
+- Use of fragments and navigation between different fragments
+
+## counter
+
+#### Guided by [Android разработка - с нуля до профессионала. Полный курс](https://www.udemy.com/course/android-kak-po-notam-a/)
+
+### Description
+
+Application with a simple counter
+
+### Technology and purpose
+
+- Use of LiveData for the purpose of saving data after screen rotation
+
+## databindingdemo
+
+#### Guided by [Android разработка - с нуля до профессионала. Полный курс](https://www.udemy.com/course/android-kak-po-notam-a/)
+
+### Description
+
+Demo application which purpose is to learn the Data Binding library
+
+### Technology and purpose
+
+- Use of Data Binding library
+
+## favouritemovies
+
+#### Guided by [Android разработка - с нуля до профессионала. Полный курс](https://www.udemy.com/course/android-kak-po-notam-a/)
+
+### Description
+
+Application which shows different movies ordered by genre with CRUD operations
+
+### Technology and purpose
+
+- Use of ViewModel and LiveData
+- Use of RecyclerView and adapters
+- Room CRUD operations
