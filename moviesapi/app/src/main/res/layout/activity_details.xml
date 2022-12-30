@@ -1,69 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".activity.DetailsActivity">
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
 
-    <ScrollView
+    <data>
+
+        <variable
+            name="result"
+            type="com.example.moviesapi.model.Results" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        android:layout_height="match_parent"
+        tools:context=".activity.DetailsActivity">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
-            <ImageView
-                android:id="@+id/ivDetail"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="400dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:src="@drawable/ic_baseline_image_24"
-                android:scaleType="center"
-                app:layout_constraintStart_toStartOf="parent" />
+                android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/tvTitleDetail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                app:layout_constraintTop_toBottomOf="@id/ivDetail"
-                tools:text="Title"
-                android:textSize="32sp"
-                android:textStyle="bold"/>
+                <ImageView
+                    android:id="@+id/ivDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="400dp"
+                    bind:posterPath="@{result.posterPath}"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:src="@drawable/ic_baseline_image_24"
+                    android:scaleType="center"
+                    app:layout_constraintStart_toStartOf="parent" />
 
-            <TextView
-                android:id="@+id/tvPopularityDetail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                app:layout_constraintTop_toBottomOf="@id/tvTitleDetail"
-                android:layout_marginTop="8dp"
-                tools:text="Popularity"
-                android:textSize="16sp"
-                android:textStyle="italic"/>
+                <TextView
+                    android:id="@+id/tvTitleDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text="@{result.originalTitle}"
+                    app:layout_constraintTop_toBottomOf="@id/ivDetail"
+                    tools:text="Title"
+                    android:textSize="32sp"
+                    android:textStyle="bold"/>
 
-            <TextView
-                android:id="@+id/tvDescriptionDetail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                app:layout_constraintTop_toBottomOf="@id/tvPopularityDetail"
-                android:layout_marginTop="8dp"
-                tools:text="Popularity"
-                android:textSize="20sp" />
+                <TextView
+                    android:id="@+id/tvPopularityDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text='@{""+result.popularity}'
+                    app:layout_constraintTop_toBottomOf="@id/tvTitleDetail"
+                    android:layout_marginTop="8dp"
+                    tools:text="Popularity"
+                    android:textSize="16sp"
+                    android:textStyle="italic"/>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/tvDescriptionDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text="@{result.overview}"
+                    app:layout_constraintTop_toBottomOf="@id/tvPopularityDetail"
+                    android:layout_marginTop="8dp"
+                    tools:text="Popularity"
+                    android:textSize="20sp" />
 
-    </ScrollView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
 
 
 
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
+

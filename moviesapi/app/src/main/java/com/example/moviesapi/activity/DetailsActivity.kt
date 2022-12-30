@@ -24,14 +24,6 @@ class DetailsActivity : AppCompatActivity() {
     }
 
     private fun setImageInformation() {
-        val imgPath = getString(R.string.base_img_path) + movie.poster_path
-        Glide.with(this)
-            .load(imgPath)
-            .placeholder(R.drawable.ic_baseline_image_24)
-            .into(binding.ivDetail)
-
-        binding.tvTitleDetail.text = movie.title
-        binding.tvPopularityDetail.text = movie.popularity.toString()
-        binding.tvDescriptionDetail.text = movie.overview
+        binding.result = movie
     }
 }

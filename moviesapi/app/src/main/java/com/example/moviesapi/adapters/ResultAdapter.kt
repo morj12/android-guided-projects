@@ -31,15 +31,8 @@ class ResultAdapter(val listener: OnClickListener) : RecyclerView.Adapter<Result
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val result = items[position]
-
-        holder.binding.tvTitle.text = result.title
-        holder.binding.tvPopularity.text = result.popularity.toString()
         holder.setListener(result)
-        val imgPath = context.getString(R.string.base_img_path) + result.poster_path
-        Glide.with(context)
-            .load(imgPath)
-            .placeholder(R.drawable.ic_baseline_image_24)
-            .into(holder.binding.ivMovie)
+        holder.binding.result = result
     }
 
     override fun getItemCount() = items.size
