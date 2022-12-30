@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="4dp"
+    app:cardElevation="8dp"
+    app:cardUseCompatPadding="true">
+
+    <RelativeLayout
+        android:layout_margin="4dp"
+        android:padding="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/ivMovie"
+            android:scaleType="fitXY"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"/>
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ivMovie"
+            android:layout_marginTop="8dp"
+            android:textSize="14sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tvPopularity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvTitle"
+            android:layout_marginTop="8dp"
+            android:textSize="8sp"
+            android:textStyle="italic"/>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

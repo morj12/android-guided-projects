@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">moviesapi</string>
+    <string name="base_img_path">https://image.tmdb.org/t/p/w500/</string>
+</resources>
