@@ -4,16 +4,17 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.moviesapi.R
 import com.example.moviesapi.databinding.ResultItemBinding
 import com.example.moviesapi.model.Results
 
-class ResultAdapter(val listener: OnClickListener) : RecyclerView.Adapter<ResultAdapter.ViewHolder>() {
+class ResultAdapter(val listener: OnClickListener) :
+    PagedListAdapter<Results, ResultAdapter.ViewHolder>(Results.CALLBACK) {
 
     private lateinit var context: Context
-    private var items = mutableListOf<Results>()
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val binding = ResultItemBinding.bind(view)
@@ -30,15 +31,11 @@ class ResultAdapter(val listener: OnClickListener) : RecyclerView.Adapter<Result
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val result = items[position]
-        holder.setListener(result)
-        holder.binding.result = result
-    }
-
-    override fun getItemCount() = items.size
-
-    fun setList(list: MutableList<Results>) {
-        items = list
+        val result = getItem(position)
+        if (result != null) {
+            holder.setListener(result)
+            holder.binding.result = result
+        }
     }
 
     interface OnClickListener {

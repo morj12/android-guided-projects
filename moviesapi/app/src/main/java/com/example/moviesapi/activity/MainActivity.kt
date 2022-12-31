@@ -4,30 +4,22 @@ import android.content.Intent
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.telecom.Call.Details
-import android.util.Log
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.paging.PagedList
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.example.moviesapi.R
 import com.example.moviesapi.adapters.ResultAdapter
 import com.example.moviesapi.databinding.ActivityMainBinding
-import com.example.moviesapi.model.MovieResponse
 import com.example.moviesapi.model.Results
-import com.example.moviesapi.service.RetrofitInstance
 import com.example.moviesapi.viewmodel.MainActivityViewModel
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class MainActivity : AppCompatActivity(), ResultAdapter.OnClickListener {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
-    private var movies = mutableListOf<Results>()
+    private lateinit var results: PagedList<Results>
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: ResultAdapter
@@ -56,25 +48,26 @@ class MainActivity : AppCompatActivity(), ResultAdapter.OnClickListener {
     }
 
     private fun getPopularMovies() {
-        viewModel.getAllMovieData().observe(
-            this
-        ) {
-            movies = it.toMutableList()
+        viewModel.pagedListLiveData.observe(this) {
+            results = it
             fillRecyclerView()
         }
     }
 
     private fun fillRecyclerView() {
-        recyclerView = binding.recyclerView
+
         adapter = ResultAdapter(this)
-        adapter.setList(movies)
+        adapter.submitList(results)
 
         val spanCount =
             if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) 2
             else 4
-        recyclerView.layoutManager = GridLayoutManager(this, spanCount)
-        recyclerView.itemAnimator = DefaultItemAnimator()
-        recyclerView.adapter = adapter
+        recyclerView = binding.recyclerView.also {
+            it.layoutManager = GridLayoutManager(this, spanCount)
+            it.itemAnimator = DefaultItemAnimator()
+            it.adapter = adapter
+        }
+
         adapter.notifyDataSetChanged()
         swipeRefreshLayout.isRefreshing = false
     }
