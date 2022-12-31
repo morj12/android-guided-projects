@@ -125,3 +125,15 @@ Application which shows different movies loaded from internet
 - Use of RecyclerView and adapters
 - Retrofit
 - Paging library
+
+## didemo
+
+#### Guided by [Android разработка - с нуля до профессионала. Полный курс](https://www.udemy.com/course/android-kak-po-notam-a/)
+
+### Description
+
+Application which builds a complex object using various dependency injection methods
+
+### Technology and purpose
+
+- Dagger
