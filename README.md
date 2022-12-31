@@ -110,3 +110,18 @@ Application which shows different movies ordered by genre with CRUD operations
 - Use of ViewModel and LiveData
 - Use of RecyclerView and adapters
 - Room CRUD operations
+
+## moviesapi
+
+#### Guided by [Android разработка - с нуля до профессионала. Полный курс](https://www.udemy.com/course/android-kak-po-notam-a/)
+
+### Description
+
+Application which shows different movies loaded from internet
+
+### Technology and purpose
+
+- Use of ViewModel and LiveData
+- Use of RecyclerView and adapters
+- Retrofit
+- Paging library
