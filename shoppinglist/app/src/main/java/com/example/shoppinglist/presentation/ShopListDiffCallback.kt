@@ -3,6 +3,10 @@ package com.example.shoppinglist.presentation
 import androidx.recyclerview.widget.DiffUtil
 import com.example.shoppinglist.domain.ShopItem
 
+/**
+ * NOT USED ANYMORE
+ */
+
 class ShopListDiffCallback(
     private val oldList: List<ShopItem>,
     private val newList: List<ShopItem>
