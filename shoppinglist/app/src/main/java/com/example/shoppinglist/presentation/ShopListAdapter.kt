@@ -26,9 +26,8 @@ class ShopListAdapter : ListAdapter<ShopItem, ShopItemViewHolder>(ShopItemDiffCa
         val item = getItem(position)
         holder.binding.tvName.text = item.name
         holder.binding.tvCount.text = item.count.toString()
-        holder.binding.root.setOnLongClickListener {
+        holder.binding.root.setOnClickListener {
             onShopItemClickListener?.invoke(item)
-            true
         }
         holder.binding.root.setOnLongClickListener {
             onShopItemLongClickListener?.invoke(item)

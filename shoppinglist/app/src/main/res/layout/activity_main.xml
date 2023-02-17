@@ -23,11 +23,9 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:clickable="true"
         android:contentDescription="@string/add_new_shop_item"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_add"
-        android:focusable="true" />
+        app:srcCompat="@drawable/ic_add" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

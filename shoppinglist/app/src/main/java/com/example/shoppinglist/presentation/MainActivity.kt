@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setupRecyclerView()
+        setupAddButton()
 
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         viewModel.shopList.observe(this) {
@@ -42,6 +43,13 @@ class MainActivity : AppCompatActivity() {
         setupClickListener()
         setupLongClickListener()
         setupSwipeListener()
+    }
+
+    private fun setupAddButton() {
+        binding.fabAddItem.setOnClickListener {
+            val intent = ShopItemActivity.newIntentAddItem(this)
+            startActivity(intent)
+        }
     }
 
     private fun setupSwipeListener() {
@@ -70,6 +78,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupClickListener() {
-        adapter.onShopItemClickListener = {}
+        adapter.onShopItemClickListener = {
+            val intent = ShopItemActivity.newIntentEditItem(this, it.id)
+            startActivity(intent)
+        }
     }
 }
