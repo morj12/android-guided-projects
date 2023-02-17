@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.shoppinglist.domain.ShopItem
 import com.example.shoppinglist.domain.ShopListRepository
+import kotlin.random.Random
 
 object ShopListRepositoryImpl : ShopListRepository {
 
@@ -13,20 +14,16 @@ object ShopListRepositoryImpl : ShopListRepository {
     private var autoIncrementId = 0
 
     init {
-        (0..3).forEach {
-            val item = ShopItem("Name $it", it * 2, true)
+        (0..15).forEach {
+            val item = ShopItem("Name $it", it * 2, Random.nextBoolean())
             addShopItem(item)
         }
     }
 
-    override fun getShopList(): LiveData<List<ShopItem>> {
-        return shopListLD
-    }
+    override fun getShopList() = shopListLD
 
-    override fun getShopItem(id: Int): ShopItem {
-        return shopList.find { it.id == id }
-            ?: throw RuntimeException("Elements with id $id not found")
-    }
+    override fun getShopItem(id: Int) = shopList.find { it.id == id }
+        ?: throw RuntimeException("Elements with id $id not found")
 
     override fun addShopItem(shopItem: ShopItem) {
         if (shopItem.id == ShopItem.UNDEFINED_ID) shopItem.id = autoIncrementId++
