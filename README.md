@@ -27,11 +27,10 @@ Sports related application which allows you to track the distance and the path o
 
 ### Description
 
-Chess based game where you need to move the knight visiting each square exactly once.
+Chess turn-based game where you need to move the knight visiting each square exactly once.
 
 ### Technology and purpose
 
-- Turn-based game
 - Create views programmatically
 
 ## sports
@@ -95,7 +94,7 @@ Demo application which purpose is to learn the Data Binding library
 
 ### Technology and purpose
 
-- Use of Data Binding library
+- Data Binding library
 
 ## favouritemovies
 
@@ -107,8 +106,7 @@ Application which shows different movies ordered by genre with CRUD operations
 
 ### Technology and purpose
 
-- Use of ViewModel and LiveData
-- Use of RecyclerView and adapters
+- MVVM
 - Room CRUD operations
 
 ## moviesapi
@@ -121,10 +119,9 @@ Application which shows different movies loaded from internet
 
 ### Technology and purpose
 
-- Use of ViewModel and LiveData
-- Use of RecyclerView and adapters
+- MVVM
+- RecyclerView + Paging library
 - Retrofit
-- Paging library
 
 ## didemo
 
@@ -137,3 +134,30 @@ Application which builds a complex object using various dependency injection met
 ### Technology and purpose
 
 - Dagger
+
+## shoppinglist
+
+#### Guided by [Android профессиональный уровень](https://www.udemy.com/course/android_prof/)
+
+### Description
+
+Application which allows to add items to a shopping list, edit and remove them
+
+### Technology and purpose
+
+- MVVM & Clean Architecture
+- Improved RecyclerView with ListAdapter
+
+## composition
+
+#### Guided by [Android профессиональный уровень](https://www.udemy.com/course/android_prof/)
+
+### Description
+
+Simple game related to maths composed by a single activity with multiple fragments
+
+### Technology and purpose
+
+- MVVM & Clean Architecture
+- FragmentManager and Jetpack Navigation
+- Data Binding
