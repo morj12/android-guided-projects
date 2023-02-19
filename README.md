@@ -141,7 +141,7 @@ Application which fetches some simple data from an API and shows it
 
 Application which shows different movies loaded from internet
 
-<img src="images/09.moviesapi.png" alt="Screenshot" width="150"/>
+<img src="images/10.moviesapi.png" alt="Screenshot" width="150"/>
 
 ### Technology and purpose
 
@@ -169,7 +169,7 @@ Application which builds a complex object using various dependency injection met
 
 Application which allows to add items to a shopping list, edit and remove them
 
-<img src="images/11.shoppinglist.png" alt="Screenshot" width="150"/>
+<img src="images/12.shoppinglist.png" alt="Screenshot" width="150"/>
 
 ### Technology and purpose
 
@@ -185,7 +185,7 @@ Application which allows to add items to a shopping list, edit and remove them
 
 Simple game related to maths composed by a single activity with multiple fragments
 
-<img src="images/12.composition.png" alt="Screenshot" width="150"/>
+<img src="images/13.composition.png" alt="Screenshot" width="150"/>
 
 ### Technology and purpose
 
