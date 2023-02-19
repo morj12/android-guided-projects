@@ -1,9 +1,6 @@
 package com.example.shoppinglist.presentation
 
-import android.view.View
+import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
-import com.example.shoppinglist.databinding.ItemShopDisabledBinding
 
-class ShopItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    val binding = ItemShopDisabledBinding.bind(itemView)
-}
+class ShopItemViewHolder(val binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root)
