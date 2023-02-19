@@ -8,6 +8,8 @@
 
 Sports related application which allows you to track the distance and the path of your run (or bike ride). It stores and analyzes your runs data, calculates your records, and allows you to take a photo of your run.
 
+<img src="images/01.wild-running.png" alt="Screenshot" width="150"/>
+
 ### Technology and purpose
 
 - Activities interaction and intents
@@ -29,6 +31,8 @@ Sports related application which allows you to track the distance and the path o
 
 Chess turn-based game where you need to move the knight visiting each square exactly once.
 
+<img src="images/02.chesstour.png" alt="Screenshot" width="150"/>
+
 ### Technology and purpose
 
 - Create views programmatically
@@ -40,6 +44,8 @@ Chess turn-based game where you need to move the knight visiting each square exa
 ### Description
 
 Application which main purpose is to learn how RecyclerView adapters work.
+
+<img src="images/03.sports.png" alt="Screenshot" width="150"/>
 
 ### Technology and purpose
 
@@ -54,6 +60,8 @@ Application which main purpose is to learn how RecyclerView adapters work.
 
 Application which shows a list of actors where you can edit them, remove them or add new elements.
 
+<img src="images/04.top.png" alt="Screenshot" width="150"/>
+
 ### Technology and purpose
 
 - RecyclerView + Adapter
@@ -67,6 +75,8 @@ Application which shows a list of actors where you can edit them, remove them or
 ### Description
 
 Application which contains a simple quiz of three random questions about soccer.
+
+<img src="images/05.soccerquiz.png" alt="Screenshot" width="150"/>
 
 ### Technology and purpose
 
@@ -104,6 +114,8 @@ Demo application which purpose is to learn the Data Binding library
 
 Application which shows different movies ordered by genre with CRUD operations
 
+<img src="images/08.favouritemovies.png" alt="Screenshot" width="150"/>
+
 ### Technology and purpose
 
 - MVVM
@@ -116,6 +128,8 @@ Application which shows different movies ordered by genre with CRUD operations
 ### Description
 
 Application which shows different movies loaded from internet
+
+<img src="images/09.moviesapi.png" alt="Screenshot" width="150"/>
 
 ### Technology and purpose
 
@@ -143,6 +157,8 @@ Application which builds a complex object using various dependency injection met
 
 Application which allows to add items to a shopping list, edit and remove them
 
+<img src="images/11.shoppinglist.png" alt="Screenshot" width="150"/>
+
 ### Technology and purpose
 
 - MVVM & Clean Architecture
@@ -155,6 +171,8 @@ Application which allows to add items to a shopping list, edit and remove them
 ### Description
 
 Simple game related to maths composed by a single activity with multiple fragments
+
+<img src="images/12.composition.png" alt="Screenshot" width="150"/>
 
 ### Technology and purpose
 
