@@ -163,6 +163,7 @@ Application which allows to add items to a shopping list, edit and remove them
 
 - MVVM & Clean Architecture
 - Improved RecyclerView with ListAdapter
+- Data Binding
 
 ## composition
 
