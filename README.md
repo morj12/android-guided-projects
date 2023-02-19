@@ -121,6 +121,18 @@ Application which shows different movies ordered by genre with CRUD operations
 - MVVM
 - Room CRUD operations
 
+## retrofitdemo
+
+#### Guided by [Android разработка - с нуля до профессионала. Полный курс](https://www.udemy.com/course/android-kak-po-notam-a/)
+
+### Description
+
+Application which fetches some simple data from an API and shows it
+
+### Technology and purpose
+
+- Retrofit
+
 ## moviesapi
 
 #### Guided by [Android разработка - с нуля до профессионала. Полный курс](https://www.udemy.com/course/android-kak-po-notam-a/)
