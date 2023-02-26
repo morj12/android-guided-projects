@@ -2,6 +2,7 @@ package com.example.coroutinestart
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.widget.Toast
 import androidx.core.view.isVisible
 import com.example.coroutinestart.databinding.ActivityMainBinding
@@ -12,6 +13,8 @@ class MainActivity : AppCompatActivity() {
     private val binding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
     }
+
+//    private val handler = Handler(mainLooper)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +41,11 @@ class MainActivity : AppCompatActivity() {
     private fun loadCity(callback: (String) -> Unit) {
         thread {
             Thread.sleep(5000)
-            callback("Moscow")
+//            handler.post { callback("Moscow") }
+            runOnUiThread {
+                callback("Moscow")
+            }
+
         }
     }
 
@@ -49,6 +56,8 @@ class MainActivity : AppCompatActivity() {
             Toast.LENGTH_SHORT
         ).show()
         Thread.sleep(5000)
-        callback(17)
+//        handler.post { callback(17) }
+        runOnUiThread { callback(17) }
+
     }
 }
