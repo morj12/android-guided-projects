@@ -1,47 +1,38 @@
 package com.example.shoppinglist.data
 
+import android.app.Application
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import com.example.shoppinglist.domain.ShopItem
 import com.example.shoppinglist.domain.ShopListRepository
 import kotlin.random.Random
 
-object ShopListRepositoryImpl : ShopListRepository {
+class ShopListRepositoryImpl(
+    application: Application
+) : ShopListRepository {
 
-    private val shopListLD = MutableLiveData<List<ShopItem>>()
-    private val shopList = mutableListOf<ShopItem>()
+    private val shopItemDao = AppDatabase.getDatabase(application).shopItemDao()
+    private val mapper = ShopItemMapper()
 
-    private var autoIncrementId = 0
+    override fun getShopList() =
+        Transformations.map(shopItemDao.getShopItems(), mapper::mapListDbModelToListEntity)
 
-    init {
-        (0..15).forEach {
-            val item = ShopItem("Name $it", it * 2, Random.nextBoolean())
-            addShopItem(item)
-        }
+    override suspend fun getShopItem(id: Int): ShopItem {
+        val dbModel = shopItemDao.getShopItem(id)
+        return mapper.mapDbModelToEntity(dbModel)
     }
 
-    override fun getShopList() = shopListLD
-
-    override fun getShopItem(id: Int) = shopList.find { it.id == id }
-        ?: throw RuntimeException("Elements with id $id not found")
-
-    override fun addShopItem(shopItem: ShopItem) {
-        if (shopItem.id == ShopItem.UNDEFINED_ID) shopItem.id = autoIncrementId++
-        shopList.add(shopItem)
-        updateList()
+    override suspend fun addShopItem(shopItem: ShopItem) {
+        shopItemDao.addShopItem(mapper.mapEntityToDbModel(shopItem))
     }
 
-    override fun deleteShopItem(shopItem: ShopItem) {
-        shopList.remove(shopItem)
-        updateList()
+    override suspend fun deleteShopItem(shopItem: ShopItem) {
+        shopItemDao.deleteShopItem(shopItem.id)
     }
 
-    override fun editShopItem(shopItem: ShopItem) {
-        shopList[shopList.indexOf(shopList.find { it.id == shopItem.id })] = shopItem
-        updateList()
-    }
-
-    private fun updateList() {
-        shopListLD.value = shopList.toList()
+    override suspend fun editShopItem(shopItem: ShopItem) {
+        addShopItem(shopItem)
     }
 }
