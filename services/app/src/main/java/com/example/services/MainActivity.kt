@@ -1,6 +1,10 @@
 package com.example.services
 
 import android.Manifest.permission.POST_NOTIFICATIONS
+import android.app.job.JobInfo
+import android.app.job.JobScheduler
+import android.app.job.JobWorkItem
+import android.content.ComponentName
 import android.content.pm.PackageManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -14,6 +18,8 @@ class MainActivity : AppCompatActivity() {
     private val binding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
     }
+
+    private var pageNumber = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +36,30 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        binding.intentService.setOnClickListener {
+            ContextCompat.startForegroundService(this, MyIntentService.newIntent(this))
+        }
+
+        binding.jobScheduler.setOnClickListener {
+            val componentName = ComponentName(this, MyJobService::class.java)
+
+            val jobInfo = JobInfo.Builder(MyJobService.JOB_ID, componentName)
+                .setRequiresCharging(true)
+                .setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED)
+//                .setPersisted(true)
+                .build()
+
+            val jobScheduler = getSystemService(JOB_SCHEDULER_SERVICE) as JobScheduler
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                val intent = MyJobService.newIntent(getAndIncreasePage())
+                jobScheduler.enqueue(jobInfo, JobWorkItem(intent))
+//                jobScheduler.schedule(jobInfo) // kills all other services
+            } else {
+                startService(MyIntentService2.newIntent(this, getAndIncreasePage()))
+            }
+        }
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             ActivityCompat.requestPermissions(
                 this@MainActivity,
@@ -37,6 +67,11 @@ class MainActivity : AppCompatActivity() {
                 100
             )
         }
+    }
+
+    private fun getAndIncreasePage(): Int {
+        pageNumber += 10
+        return pageNumber
     }
 
     private fun requestPermissionsAndExecute(method: () -> Unit) {

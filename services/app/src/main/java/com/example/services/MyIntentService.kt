@@ -10,7 +10,7 @@ import android.util.Log
 import androidx.core.app.NotificationCompat
 
 class MyIntentService: IntentService(NAME) {
-    
+
     /**
      * If it's called more than once, each instance is executed consequentially
      */
