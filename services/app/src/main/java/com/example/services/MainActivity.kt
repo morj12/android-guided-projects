@@ -1,21 +1,15 @@
 package com.example.services
 
 import android.Manifest.permission.POST_NOTIFICATIONS
-import android.app.Notification
-import android.app.NotificationChannel
-import android.app.NotificationManager
 import android.content.pm.PackageManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.app.ActivityCompat
-import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import com.example.services.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-
-    private var id = 0
 
     private val binding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
@@ -27,14 +21,25 @@ class MainActivity : AppCompatActivity() {
 
         binding.simpleService.setOnClickListener {
             startService(MyService.newIntent(this, 10))
+            stopService(MyForegroundService.newIntent(this)) // to stop service from outside
         }
 
         binding.foregroundService.setOnClickListener {
-            tryShowNotification()
+            requestPermissionsAndExecute {
+                ContextCompat.startForegroundService(this, MyForegroundService.newIntent(this))
+            }
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            ActivityCompat.requestPermissions(
+                this@MainActivity,
+                arrayOf(POST_NOTIFICATIONS),
+                100
+            )
         }
     }
 
-    private fun tryShowNotification() {
+    private fun requestPermissionsAndExecute(method: () -> Unit) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if (ContextCompat.checkSelfPermission(this@MainActivity, POST_NOTIFICATIONS)
                 == PackageManager.PERMISSION_DENIED
@@ -45,36 +50,10 @@ class MainActivity : AppCompatActivity() {
                     100
                 )
             } else {
-                showNotification()
+                method()
             }
         } else {
-            showNotification()
+            method()
         }
-    }
-
-    private fun showNotification() {
-        val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(
-                CHANNEL_ID,
-                CHANNEL_NAME,
-                NotificationManager.IMPORTANCE_DEFAULT
-            )
-            notificationManager.createNotificationChannel(channel)
-        }
-
-        val notification = NotificationCompat.Builder(this, CHANNEL_ID)
-            .setContentTitle("Title")
-            .setContentText("Text")
-            .setSmallIcon(R.drawable.ic_launcher_background)
-            .build()
-
-        notificationManager.notify(id++, notification)
-    }
-
-    companion object {
-
-        private const val CHANNEL_ID = "channel_id"
-        private const val CHANNEL_NAME = "channel_name"
     }
 }

@@ -28,6 +28,7 @@
                 android:value="" />
         </activity>
         <service android:name=".MyService" />
+        <service android:name=".MyForegroundService" />
     </application>
 
 </manifest>
