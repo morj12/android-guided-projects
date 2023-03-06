@@ -6,6 +6,7 @@ import android.content.Intent
 import android.util.Log
 
 class MyIntentService2 : IntentService(NAME) {
+
     override fun onCreate() {
         super.onCreate()
         setIntentRedelivery(true)
@@ -25,9 +26,6 @@ class MyIntentService2 : IntentService(NAME) {
 
     companion object {
 
-        private const val CHANNEL_ID = "channel_id"
-        private const val CHANNEL_NAME = "channel_name"
-        private const val NOTIFICATION_ID = 229
         private const val NAME = "MyIntentService"
         private const val PAGE = "page"
 

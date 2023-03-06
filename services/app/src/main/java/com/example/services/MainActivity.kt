@@ -60,6 +60,10 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        binding.jobIntentService.setOnClickListener {
+            MyJobIntentService.enqueue(this, getAndIncreasePage())
+        }
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             ActivityCompat.requestPermissions(
                 this@MainActivity,
