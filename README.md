@@ -192,3 +192,27 @@ Simple game related to maths composed by a single activity with multiple fragmen
 - MVVM & Clean Architecture
 - FragmentManager and Jetpack Navigation
 - Data Binding
+
+## coroutinestart
+
+#### Guided by [Android профессиональный уровень](https://www.udemy.com/course/android_prof/)
+
+### Description
+
+Introductory coroutines project
+
+### Technology and purpose
+
+- Coroutines
+
+## services
+
+#### Guided by [Android профессиональный уровень](https://www.udemy.com/course/android_prof/)
+
+### Description
+
+Introductory services project
+
+### Technology and purpose
+
+- Services, WorkManager
