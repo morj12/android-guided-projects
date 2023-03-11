@@ -1,13 +1,13 @@
-package com.example.cart_and_notes.db
+package com.example.cart_and_notes.data.db
 
 import android.app.Application
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.cart_and_notes.entity.CardItemDbModel
-import com.example.cart_and_notes.entity.CardListDbModel
-import com.example.cart_and_notes.entity.DbItemDbModel
-import com.example.cart_and_notes.entity.NoteDbModel
+import com.example.cart_and_notes.data.entity.CardItemDbModel
+import com.example.cart_and_notes.data.entity.CardListDbModel
+import com.example.cart_and_notes.data.entity.DbItemDbModel
+import com.example.cart_and_notes.data.entity.NoteDbModel
 
 @Database(
     entities = [CardItemDbModel::class, CardListDbModel::class, DbItemDbModel::class, NoteDbModel::class],

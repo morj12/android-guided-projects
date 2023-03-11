@@ -8,7 +8,7 @@ import android.view.Menu
 import android.view.MenuItem
 import com.example.cart_and_notes.R
 import com.example.cart_and_notes.databinding.ActivityNewNoteBinding
-import com.example.cart_and_notes.entity.NoteDbModel
+import com.example.cart_and_notes.data.entity.NoteDbModel
 import com.example.cart_and_notes.presentation.view.main.NoteFragment
 import java.util.*
 
@@ -17,6 +17,9 @@ class NewNoteActivity : AppCompatActivity() {
     private lateinit var binding: ActivityNewNoteBinding
 
     private var note: NoteDbModel? = null
+
+    private var validTitle = true
+    private var validDescription = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,22 +46,33 @@ class NewNoteActivity : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
-
-    // TODO: add check for incorrect and null values
     private fun setMainResult() {
-        var isUpdate = false
-        val tempNote = if (note == null) {
-            createNote()
-        } else {
-            isUpdate = true
-            updateNote()
+        if (isInputValid()) {
+            var isUpdate = false
+            val tempNote = if (note == null) {
+                createNote()
+            } else {
+                isUpdate = true
+                updateNote()
+            }
+            val intent = Intent().apply {
+                putExtra(NoteFragment.NEw_NOTE_KEY, tempNote)
+                putExtra(NoteFragment.IS_UPDATE_KEY, isUpdate)
+            }
+            setResult(RESULT_OK, intent)
+            finish()
+        } else if (!validTitle) {
+            binding.edTitle.error = getString(R.string.empty_title)
+        } else if (!validDescription) {
+            binding.edTitle.error = getString(R.string.empty_desc)
         }
-        val intent = Intent().apply {
-            putExtra(NoteFragment.NEw_NOTE_KEY, tempNote)
-            putExtra(NoteFragment.IS_UPDATE_KEY, isUpdate)
-        }
-        setResult(RESULT_OK, intent)
-        finish()
+
+    }
+
+    private fun isInputValid(): Boolean {
+        validTitle = binding.edTitle.text.toString().isNotBlank()
+        validDescription = binding.edDescription.text.toString().isNotBlank()
+        return validTitle && validDescription
     }
 
     private fun createNote(): NoteDbModel {

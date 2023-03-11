@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cart_and_notes.databinding.NoteItemBinding
-import com.example.cart_and_notes.entity.NoteDbModel
+import com.example.cart_and_notes.data.entity.NoteDbModel
 
 // TODO: use entity from domain layer
 class NoteAdapter : ListAdapter<NoteDbModel, NoteAdapter.ViewHolder>(NoteCallback()) {

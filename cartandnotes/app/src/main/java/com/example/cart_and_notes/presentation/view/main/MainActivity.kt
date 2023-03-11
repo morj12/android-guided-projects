@@ -9,7 +9,6 @@ import com.example.cart_and_notes.util.FragmentManager
 
 
 // TODO: use clean architecture (data, domain, presentation)
-// TODO: use DbModel name for db entities
 // TODO: use enums in db entities
 class MainActivity : AppCompatActivity() {
 

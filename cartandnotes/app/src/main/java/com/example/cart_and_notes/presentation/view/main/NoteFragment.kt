@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cart_and_notes.databinding.FragmentNoteBinding
-import com.example.cart_and_notes.entity.NoteDbModel
+import com.example.cart_and_notes.data.entity.NoteDbModel
 import com.example.cart_and_notes.presentation.adapter.NoteAdapter
 import com.example.cart_and_notes.util.AdditionFragment
 import com.example.cart_and_notes.util.MyApp

@@ -1,4 +1,4 @@
-package com.example.cart_and_notes.entity
+package com.example.cart_and_notes.data.entity
 
 import android.os.Parcelable
 import androidx.room.Entity

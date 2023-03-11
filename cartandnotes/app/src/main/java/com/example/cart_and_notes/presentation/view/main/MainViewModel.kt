@@ -1,8 +1,8 @@
 package com.example.cart_and_notes.presentation.view.main
 
 import androidx.lifecycle.*
-import com.example.cart_and_notes.db.AppDatabase
-import com.example.cart_and_notes.entity.NoteDbModel
+import com.example.cart_and_notes.data.db.AppDatabase
+import com.example.cart_and_notes.data.entity.NoteDbModel
 import kotlinx.coroutines.launch
 
 class MainViewModel(database: AppDatabase): ViewModel() {
