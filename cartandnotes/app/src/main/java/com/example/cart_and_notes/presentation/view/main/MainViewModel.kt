@@ -2,25 +2,44 @@ package com.example.cart_and_notes.presentation.view.main
 
 import androidx.lifecycle.*
 import com.example.cart_and_notes.data.db.AppDatabase
-import com.example.cart_and_notes.data.entity.NoteDbModel
+import com.example.cart_and_notes.data.repository.CartRepositoryImpl
+import com.example.cart_and_notes.data.repository.NoteRepositoryImpl
+import com.example.cart_and_notes.domain.entity.Cart
+import com.example.cart_and_notes.domain.entity.Note
 import kotlinx.coroutines.launch
 
+// TODO: remove dependencies from data layer
 class MainViewModel(database: AppDatabase): ViewModel() {
 
-    private val noteDao = database.noteDao()
+    private val noteRepository = NoteRepositoryImpl(database)
+    private val cartRepository = CartRepositoryImpl(database)
 
-    val allNotes: LiveData<List<NoteDbModel>> = noteDao.getNotes().asLiveData()
+    val allNotes: LiveData<List<Note>> = noteRepository.getNotes().asLiveData()
 
-    fun insertNote(note: NoteDbModel) = viewModelScope.launch {
-        noteDao.insertNote(note)
+    fun insertNote(note: Note) = viewModelScope.launch {
+        noteRepository.insertNote(note)
     }
 
-    fun deleteNote(note: NoteDbModel) = viewModelScope.launch {
-        noteDao.deleteNote(note)
+    fun deleteNote(note: Note) = viewModelScope.launch {
+        noteRepository.deleteNote(note)
     }
 
-    fun updateNote(note: NoteDbModel) = viewModelScope.launch {
-        noteDao.updateNote(note)
+    fun updateNote(note: Note) = viewModelScope.launch {
+        noteRepository.updateNote(note)
+    }
+
+    val allCarts: LiveData<List<Cart>> = cartRepository.getCarts().asLiveData()
+
+    fun insertCart(cart: Cart) = viewModelScope.launch {
+        cartRepository.insertCart(cart)
+    }
+
+    fun deleteCart(cart: Cart) = viewModelScope.launch {
+        cartRepository.deleteCart(cart)
+    }
+
+    fun updateCart(cart: Cart) = viewModelScope.launch {
+        cartRepository.updateCart(cart)
     }
 
     class MainViewModelFactory(private val database: AppDatabase) : ViewModelProvider.Factory {

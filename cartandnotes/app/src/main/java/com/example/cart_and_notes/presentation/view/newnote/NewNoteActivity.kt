@@ -1,22 +1,21 @@
 package com.example.cart_and_notes.presentation.view.newnote
 
 import android.content.Intent
-import android.icu.text.SimpleDateFormat
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import com.example.cart_and_notes.R
 import com.example.cart_and_notes.databinding.ActivityNewNoteBinding
-import com.example.cart_and_notes.data.entity.NoteDbModel
+import com.example.cart_and_notes.domain.entity.Note
 import com.example.cart_and_notes.presentation.view.main.NoteFragment
-import java.util.*
+import com.example.cart_and_notes.util.TimeHelper
 
 class NewNoteActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityNewNoteBinding
 
-    private var note: NoteDbModel? = null
+    private var note: Note? = null
 
     private var validTitle = true
     private var validDescription = true
@@ -75,27 +74,22 @@ class NewNoteActivity : AppCompatActivity() {
         return validTitle && validDescription
     }
 
-    private fun createNote(): NoteDbModel {
-        return NoteDbModel(
+    private fun createNote(): Note {
+        return Note(
             binding.edTitle.text.toString(),
             binding.edDescription.text.toString(),
-            getCurrentTime(),
+            TimeHelper.getCurrentTime(),
             ""
         )
     }
 
-    private fun updateNote(): NoteDbModel? {
+    private fun updateNote(): Note? {
         with(binding) {
             return note?.copy(
                 title = edTitle.text.toString(),
                 content = edDescription.text.toString()
             )
         }
-    }
-
-    private fun getCurrentTime(): String {
-        val formatter = SimpleDateFormat("hh:mm:ss - yyyy/MM/dd", Locale.getDefault())
-        return formatter.format(Calendar.getInstance().time)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

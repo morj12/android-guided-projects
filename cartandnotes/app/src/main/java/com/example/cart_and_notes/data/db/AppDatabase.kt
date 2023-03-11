@@ -4,19 +4,22 @@ import android.app.Application
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.cart_and_notes.data.entity.CardItemDbModel
-import com.example.cart_and_notes.data.entity.CardListDbModel
+import com.example.cart_and_notes.data.dao.CartDao
+import com.example.cart_and_notes.data.dao.NoteDao
+import com.example.cart_and_notes.data.entity.CartItemDbModel
+import com.example.cart_and_notes.data.entity.CartDbModel
 import com.example.cart_and_notes.data.entity.DbItemDbModel
 import com.example.cart_and_notes.data.entity.NoteDbModel
 
 @Database(
-    entities = [CardItemDbModel::class, CardListDbModel::class, DbItemDbModel::class, NoteDbModel::class],
+    entities = [CartItemDbModel::class, CartDbModel::class, DbItemDbModel::class, NoteDbModel::class],
     version = 1,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun noteDao(): NoteDao
+    abstract fun cartDao(): CartDao
 
     companion object {
 

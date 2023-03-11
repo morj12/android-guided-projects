@@ -1,4 +1,4 @@
-package com.example.cart_and_notes.data.db
+package com.example.cart_and_notes.data.dao
 
 import androidx.room.Dao
 import androidx.room.Delete

@@ -3,11 +3,9 @@ package com.example.cart_and_notes.presentation.view.main
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.activityViewModels
@@ -15,7 +13,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cart_and_notes.databinding.FragmentNoteBinding
-import com.example.cart_and_notes.data.entity.NoteDbModel
+import com.example.cart_and_notes.domain.entity.Note
 import com.example.cart_and_notes.presentation.adapter.NoteAdapter
 import com.example.cart_and_notes.util.AdditionFragment
 import com.example.cart_and_notes.util.MyApp
@@ -109,16 +107,9 @@ class NoteFragment : AdditionFragment() {
             if (it.resultCode == Activity.RESULT_OK) {
                 val isUpdate = it.data?.getBooleanExtra(IS_UPDATE_KEY, false)
                     ?: throw RuntimeException("Update indicator is null")
-                val note = it.data?.getParcelableExtra<NoteDbModel>(NEw_NOTE_KEY)
+                val note = it.data?.getParcelableExtra<Note>(NEw_NOTE_KEY)
                     ?: throw RuntimeException("Note is null")
-                if (isUpdate) {
-                    mainViewModel.updateNote(note)
-                } else {
-                    mainViewModel.insertNote(note)
-                }
-
-
-
+                if (isUpdate) mainViewModel.updateNote(note) else mainViewModel.insertNote(note)
             }
         }
     }

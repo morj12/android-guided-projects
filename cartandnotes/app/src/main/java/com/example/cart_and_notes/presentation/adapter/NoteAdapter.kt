@@ -6,21 +6,20 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cart_and_notes.databinding.NoteItemBinding
-import com.example.cart_and_notes.data.entity.NoteDbModel
+import com.example.cart_and_notes.domain.entity.Note
 
-// TODO: use entity from domain layer
-class NoteAdapter : ListAdapter<NoteDbModel, NoteAdapter.ViewHolder>(NoteCallback()) {
+class NoteAdapter : ListAdapter<Note, NoteAdapter.ViewHolder>(NoteCallback()) {
 
-    var onNoteClickListener: ((NoteDbModel) -> Unit)? = null
+    var onNoteClickListener: ((Note) -> Unit)? = null
 
     class ViewHolder(val binding: NoteItemBinding) : RecyclerView.ViewHolder(binding.root)
 
-    class NoteCallback : DiffUtil.ItemCallback<NoteDbModel>() {
+    class NoteCallback : DiffUtil.ItemCallback<Note>() {
 
-        override fun areItemsTheSame(oldItem: NoteDbModel, newItem: NoteDbModel) =
+        override fun areItemsTheSame(oldItem: Note, newItem: Note) =
             oldItem.id == newItem.id
 
-        override fun areContentsTheSame(oldItem: NoteDbModel, newItem: NoteDbModel) =
+        override fun areContentsTheSame(oldItem: Note, newItem: Note) =
             oldItem == newItem
     }
 

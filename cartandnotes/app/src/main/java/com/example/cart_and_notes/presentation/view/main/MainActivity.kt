@@ -7,9 +7,9 @@ import com.example.cart_and_notes.R
 import com.example.cart_and_notes.databinding.ActivityMainBinding
 import com.example.cart_and_notes.util.FragmentManager
 
-
-// TODO: use clean architecture (data, domain, presentation)
-// TODO: use enums in db entities
+// TODO: use use-cases
+// TODO: check for useless values in entities
+// TODO: set bottom navigation selected item to the correct one after adding new item
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -27,15 +27,10 @@ class MainActivity : AppCompatActivity() {
         FragmentManager.setFragment(NoteFragment.newInstance(), this)
         binding.bottomNav.setOnItemSelectedListener {
             when(it.itemId) {
-                R.id.setting -> {
-                    Log.d("BOTTOM_NAV", "Clicked on settings")
-                }
+                R.id.setting -> Log.d("BOTTOM_NAV", "Clicked on settings")
                 R.id.notes -> FragmentManager.setFragment(NoteFragment.newInstance(), this)
-                R.id.cart -> {
-                    Log.d("BOTTOM_NAV", "Clicked on cart")
-                }
+                R.id.cart -> FragmentManager.setFragment(CartFragment.newInstance(), this)
                 R.id.new_item -> FragmentManager.currentFragment?.onClickNew()
-
             }
             true
         }
