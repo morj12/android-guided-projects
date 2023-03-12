@@ -47,8 +47,6 @@ class MainViewModel(val database: AppDatabase) : ViewModel() {
 
     fun allCartItems(cartId: Int) = cartItemRepository.getCartItems(cartId).asLiveData()
 
-    val allCartItems: LiveData<List<CartItem>> = cartItemRepository.getCartItems().asLiveData()
-
     fun insertCartItem(cartItem: CartItem) = viewModelScope.launch {
         cartItemRepository.insertCartItem(cartItem)
     }

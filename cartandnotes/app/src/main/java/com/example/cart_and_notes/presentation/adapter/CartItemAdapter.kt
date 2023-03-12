@@ -5,14 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cart_and_notes.R
 import com.example.cart_and_notes.databinding.CartItemItemBinding
-import com.example.cart_and_notes.databinding.LibraryCartItemItemBinding
 import com.example.cart_and_notes.domain.entity.CartItem
 
 class CartItemAdapter : ListAdapter<CartItem, CartItemAdapter.ViewHolder>(CartItemCallback()) {
@@ -20,7 +17,7 @@ class CartItemAdapter : ListAdapter<CartItem, CartItemAdapter.ViewHolder>(CartIt
     var onCartItemCheckBoxClickListener: ((CartItem) -> Unit)? = null
     var onCartItemEditClickListener: ((CartItem) -> Unit)? = null
 
-    class ViewHolder(val binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root)
+    class ViewHolder(val binding: CartItemItemBinding) : RecyclerView.ViewHolder(binding.root)
 
     class CartItemCallback : DiffUtil.ItemCallback<CartItem>() {
 
@@ -32,15 +29,8 @@ class CartItemAdapter : ListAdapter<CartItem, CartItemAdapter.ViewHolder>(CartIt
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val layout = when (viewType) {
-            VIEW_TYPE_ITEM -> R.layout.cart_item_item
-            VIEW_TYPE_LIBRARY -> R.layout.library_cart_item_item
-            else -> throw RuntimeException("Unknown view type: $viewType")
-        }
-
-        val binding = DataBindingUtil.inflate<ViewDataBinding>(
+        val binding = CartItemItemBinding.inflate(
             LayoutInflater.from(parent.context),
-            layout,
             parent,
             false
         )
@@ -49,26 +39,17 @@ class CartItemAdapter : ListAdapter<CartItem, CartItemAdapter.ViewHolder>(CartIt
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
-        when (holder.binding) {
-            is CartItemItemBinding -> {
-                holder.binding.apply {
-                    tvCartItemName.text = item.name
-                    tvCartItemInfo.text = item.info
-                    tvCartItemInfo.visibility = checkVisibility(item)
-                    cbCartItem.isChecked = item.checked
-                    setPaintFlagAndColor(this)
-                    cbCartItem.setOnClickListener {
-                        onCartItemCheckBoxClickListener?.invoke(item.copy(checked = cbCartItem.isChecked))
-                    }
-                    imEditCartItem.setOnClickListener {
-                        onCartItemEditClickListener?.invoke(item)
-                    }
-                }
+        holder.binding.apply {
+            tvCartItemName.text = item.name
+            tvCartItemInfo.text = item.info
+            tvCartItemInfo.visibility = checkVisibility(item)
+            cbCartItem.isChecked = item.checked
+            setPaintFlagAndColor(this)
+            cbCartItem.setOnClickListener {
+                onCartItemCheckBoxClickListener?.invoke(item.copy(checked = cbCartItem.isChecked))
             }
-            is LibraryCartItemItemBinding -> {
-                holder.binding.apply {
-                    tvLibraryCartItemName.text = item.name
-                }
+            imEditCartItem.setOnClickListener {
+                onCartItemEditClickListener?.invoke(item)
             }
         }
     }
@@ -99,15 +80,5 @@ class CartItemAdapter : ListAdapter<CartItem, CartItemAdapter.ViewHolder>(CartIt
 
     private fun checkVisibility(item: CartItem): Int {
         return if (item.info.isEmpty()) View.GONE else View.VISIBLE
-    }
-
-    override fun getItemViewType(position: Int): Int {
-        val item = getItem(position)
-        return if (item.itemType == "item") VIEW_TYPE_ITEM else VIEW_TYPE_LIBRARY
-    }
-
-    companion object {
-        const val VIEW_TYPE_ITEM = 0
-        const val VIEW_TYPE_LIBRARY = 1
     }
 }

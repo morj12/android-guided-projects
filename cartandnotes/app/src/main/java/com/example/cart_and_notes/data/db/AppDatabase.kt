@@ -9,11 +9,10 @@ import com.example.cart_and_notes.data.dao.CartItemDao
 import com.example.cart_and_notes.data.dao.NoteDao
 import com.example.cart_and_notes.data.entity.CartItemDbModel
 import com.example.cart_and_notes.data.entity.CartDbModel
-import com.example.cart_and_notes.data.entity.DbItemDbModel
 import com.example.cart_and_notes.data.entity.NoteDbModel
 
 @Database(
-    entities = [CartItemDbModel::class, CartDbModel::class, DbItemDbModel::class, NoteDbModel::class],
+    entities = [CartItemDbModel::class, CartDbModel::class, NoteDbModel::class],
     version = 1,
     exportSchema = false
 )
