@@ -35,8 +35,6 @@ class CartActivity : AppCompatActivity() {
 
     private lateinit var adapter: CartItemAdapter
 
-    private lateinit var textWatcher: TextWatcher
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCartBinding.inflate(layoutInflater)
@@ -57,19 +55,7 @@ class CartActivity : AppCompatActivity() {
         newItemName = newItem.actionView?.findViewById(R.id.ed_new_cart_item) as EditText?
         newItem.setOnActionExpandListener(expandActionView())
         saveCartItem.isVisible = false
-        textWatcher = watchText()
         return true
-    }
-
-    private fun watchText(): TextWatcher {
-        return object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun afterTextChanged(s: Editable?) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-
-            }
-        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -105,14 +91,12 @@ class CartActivity : AppCompatActivity() {
         return object : OnActionExpandListener {
             override fun onMenuItemActionExpand(item: MenuItem): Boolean {
                 saveCartItem.isVisible = true
-                newItemName?.addTextChangedListener(textWatcher)
                 return true
             }
 
             override fun onMenuItemActionCollapse(item: MenuItem): Boolean {
                 saveCartItem.isVisible = false
                 invalidateOptionsMenu()
-                newItemName?.removeTextChangedListener(textWatcher)
                 return true
             }
 
