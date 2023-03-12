@@ -17,9 +17,4 @@
         android:icon="@drawable/ic_cart"
         app:showAsAction="ifRoom" />
 
-    <item android:id="@+id/new_item"
-        android:title="@string/add_new"
-        android:icon="@drawable/id_new_item"
-        app:showAsAction="ifRoom" />
-
 </menu>

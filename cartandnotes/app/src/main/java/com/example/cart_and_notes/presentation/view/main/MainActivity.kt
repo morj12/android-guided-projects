@@ -3,12 +3,13 @@ package com.example.cart_and_notes.presentation.view.main
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import com.example.cart_and_notes.R
 import com.example.cart_and_notes.databinding.ActivityMainBinding
 import com.example.cart_and_notes.presentation.view.FragmentManager
 
 // TODO: use use-cases
-// TODO: move add button to action bar
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -35,12 +36,21 @@ class MainActivity : AppCompatActivity() {
                     FragmentManager.setFragment(CartFragment.newInstance(), this)
                     currentTab = R.id.cart
                 }
-                R.id.new_item -> {
-                    FragmentManager.currentFragment?.onClickNew()
-                }
             }
             true
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.add_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.add_any_item -> FragmentManager.currentFragment?.onClickNew()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onResume() {
