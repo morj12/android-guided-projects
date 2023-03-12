@@ -25,4 +25,13 @@
     <string name="cart_item_info_hint">Info</string>
     <string name="update_cart_item">Update</string>
     <string name="cart_items_counter">%1$d / %2$d</string>
+    <string name="prefs_general">General</string>
+    <string name="prefs_choose_note_style">Choose note style</string>
+    <string name="prefs_choose_time_format">Choose time format</string>
+    <string name="prefs_remove_ads">Remove ads</string>
+    <string name="prefs_remove_ads_summary">Remove all ads from the application</string>
+    <string name="prefs_theme">Theme</string>
+    <string name="prefs_chose_theme">Choose theme</string>
+    <string name="prefs_text">Text</string>
+    <string name="prefs_notes_text_size">Note text size</string>
 </resources>

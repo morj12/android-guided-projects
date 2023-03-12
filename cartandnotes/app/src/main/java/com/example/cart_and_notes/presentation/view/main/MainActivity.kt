@@ -1,13 +1,14 @@
 package com.example.cart_and_notes.presentation.view.main
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import com.example.cart_and_notes.R
 import com.example.cart_and_notes.databinding.ActivityMainBinding
 import com.example.cart_and_notes.presentation.view.FragmentManager
+import com.example.cart_and_notes.presentation.view.settings.SettingsActivity
 
 // TODO: use use-cases
 class MainActivity : AppCompatActivity() {
@@ -26,8 +27,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun initBottomNavigation() {
         binding.bottomNav.setOnItemSelectedListener {
-            when(it.itemId) {
-                R.id.setting -> Log.d("BOTTOM_NAV", "Clicked on settings")
+            when (it.itemId) {
+                R.id.setting -> startActivity(Intent(this, SettingsActivity::class.java))
                 R.id.notes -> {
                     FragmentManager.setFragment(NoteFragment.newInstance(), this)
                     currentTab = R.id.notes

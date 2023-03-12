@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory android:title="@string/prefs_general">
+
+        <ListPreference
+            android:defaultValue="1"
+            android:entries="@array/note_style_array"
+            android:entryValues="@array/note_style_values"
+            android:icon="@drawable/ic_prefs_style"
+            android:key="note_style_key"
+            android:title="@string/prefs_choose_note_style"
+            app:useSimpleSummaryProvider="true" />
+
+        <ListPreference
+            android:defaultValue="1"
+            android:entries="@array/time_format_array"
+            android:entryValues="@array/time_format_values"
+            android:icon="@drawable/ic_prefs_time_format"
+            android:key="time_format_key"
+            android:title="@string/prefs_choose_time_format"
+            app:useSimpleSummaryProvider="true" />
+
+        <Preference
+            android:icon="@drawable/ic_prefs_remove_ads"
+            android:summary="@string/prefs_remove_ads_summary"
+            android:title="@string/prefs_remove_ads" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/prefs_theme">
+
+        <ListPreference
+            android:defaultValue="1"
+            android:entries="@array/theme_array"
+            android:entryValues="@array/theme_values"
+            android:icon="@drawable/ic_prefs_theme"
+            android:key="theme_key"
+            android:title="@string/prefs_chose_theme"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/prefs_text">
+
+        <ListPreference
+            android:defaultValue="1"
+            android:entries="@array/notes_text_size_array"
+            android:entryValues="@array/notes_text_size_values"
+            android:icon="@drawable/ic_prefs_notes_text_size"
+            android:key="notes_Text_size_key"
+            android:title="@string/prefs_notes_text_size"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
