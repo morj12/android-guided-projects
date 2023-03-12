@@ -7,7 +7,9 @@ import android.view.MenuItem
 import android.view.MenuItem.OnActionExpandListener
 import android.widget.EditText
 import androidx.activity.viewModels
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.cart_and_notes.R
 import com.example.cart_and_notes.databinding.ActivityCartBinding
 import com.example.cart_and_notes.domain.entity.Cart
@@ -40,6 +42,7 @@ class CartActivity : AppCompatActivity() {
         initRecyclerView()
         observe()
         initClickListener()
+        setupSwipeListener()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -98,6 +101,7 @@ class CartActivity : AppCompatActivity() {
         }
     }
 
+
     private fun initCart() {
         cart = intent.getParcelableExtra(CART_KEY)
     }
@@ -123,6 +127,27 @@ class CartActivity : AppCompatActivity() {
         adapter.onCartItemCheckBoxClickListener = {
             mainViewModel.updateCartItem(it)
         }
+    }
+
+    private fun setupSwipeListener() {
+        val callback = object : ItemTouchHelper.SimpleCallback(
+            0,
+            ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
+        ) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ) = false
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val item = adapter.currentList[viewHolder.adapterPosition]
+                mainViewModel.deleteCartItem(item)
+            }
+        }
+
+        val itemTouchHelper = ItemTouchHelper(callback)
+        itemTouchHelper.attachToRecyclerView(binding.rcCartItems)
     }
 
     companion object {
