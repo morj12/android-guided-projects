@@ -1,10 +1,14 @@
 package com.example.cart_and_notes.presentation.adapter
 
+import android.content.Context
+import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.cart_and_notes.R
 import com.example.cart_and_notes.databinding.CartItemBinding
 import com.example.cart_and_notes.domain.entity.Cart
 
@@ -35,16 +39,31 @@ class CartAdapter : ListAdapter<Cart, CartAdapter.ViewHolder>(CartCallback()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
-        with(holder) {
-            binding.tvCartName.text = item.name
-            binding.tvCartTime.text = item.creationTime
-            binding.root.setOnClickListener {
+        with(holder.binding) {
+            tvCartName.text = item.name
+            tvCartTime.text = item.creationTime
+            tvCartCounter.text = root.context.getString(
+                R.string.cart_items_counter,
+                item.checkedItems,
+                item.totalItems
+            )
+            pbarCart.max = item.totalItems
+            pbarCart.progress = item.checkedItems
+            pbarCart.progressTintList =
+                ColorStateList.valueOf(getProgressBarColor(item, root.context))
+            root.setOnClickListener {
                 onCartClickListener?.invoke(item)
             }
-            binding.btEdit.setOnClickListener {
+            btEdit.setOnClickListener {
                 onEditCartClickListener?.invoke(item)
             }
         }
     }
+
+    private fun getProgressBarColor(item: Cart, context: Context) =
+        if (item.checkedItems == item.totalItems)
+            ContextCompat.getColor(context, R.color.green_main)
+        else
+            ContextCompat.getColor(context, R.color.red)
 
 }

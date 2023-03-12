@@ -44,6 +44,7 @@ class CartItemAdapter : ListAdapter<CartItem, CartItemAdapter.ViewHolder>(CartIt
             tvCartItemInfo.text = item.info
             tvCartItemInfo.visibility = checkVisibility(item)
             cbCartItem.isChecked = item.checked
+
             setPaintFlagAndColor(this)
             cbCartItem.setOnClickListener {
                 onCartItemCheckBoxClickListener?.invoke(item.copy(checked = cbCartItem.isChecked))

@@ -70,9 +70,6 @@ class CartActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    // TODO: also update cart parameters
-    // TODO: clean text after opening
-    // TODO: check for null name
     private fun addNewCartItem() {
         if (newItemName?.text.toString().isEmpty()) return
         val item = CartItem(
@@ -96,13 +93,23 @@ class CartActivity : AppCompatActivity() {
 
             override fun onMenuItemActionCollapse(item: MenuItem): Boolean {
                 saveCartItem.isVisible = false
+                newItemName?.setText("")
                 invalidateOptionsMenu()
                 return true
             }
-
         }
     }
 
+    private fun updateCartCounter() {
+        val checkedItemsCount = adapter.currentList.count(CartItem::checked)
+        val temp = cart?.copy(checkedItems = checkedItemsCount, totalItems = adapter.itemCount)
+        mainViewModel.updateCart(temp!!)
+    }
+
+    override fun onBackPressed() {
+        updateCartCounter()
+        super.onBackPressed()
+    }
 
     private fun initCart() {
         cart = intent.getParcelableExtra(CART_KEY)

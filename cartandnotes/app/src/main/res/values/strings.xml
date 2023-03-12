@@ -24,4 +24,5 @@
     <string name="cart_item_name_hint">Name</string>
     <string name="cart_item_info_hint">Info</string>
     <string name="update_cart_item">Update</string>
+    <string name="cart_items_counter">%1$d / %2$d</string>
 </resources>
