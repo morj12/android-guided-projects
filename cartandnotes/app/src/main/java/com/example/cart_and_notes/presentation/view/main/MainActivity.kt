@@ -5,11 +5,12 @@ import android.os.Bundle
 import android.util.Log
 import com.example.cart_and_notes.R
 import com.example.cart_and_notes.databinding.ActivityMainBinding
-import com.example.cart_and_notes.util.FragmentManager
+import com.example.cart_and_notes.presentation.view.FragmentManager
 
 // TODO: use use-cases
 // TODO: check for useless values in entities
 // TODO: set bottom navigation selected item to the correct one after adding new item
+// TODO: update database entities model, using foreign keys
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding

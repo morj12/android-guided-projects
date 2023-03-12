@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/delete_cart"
+        android:title="@string/delete_cart" />
+
+    <item
+        android:id="@+id/clear_cart"
+        android:title="@string/clear_cart" />
+
+    <item
+        android:id="@+id/new_cart_item"
+        android:icon="@drawable/id_new_item"
+        android:orderInCategory="1"
+        app:actionLayout="@layout/edit_action_layout"
+        android:title="@string/new_cart_item"
+        app:showAsAction="always|collapseActionView" />
+
+    <item
+        android:id="@+id/save_cart_item"
+        android:icon="@drawable/ic_save"
+        android:orderInCategory="2"
+        android:title="@string/save_cart_item"
+        app:showAsAction="always" />
+
+
+</menu>

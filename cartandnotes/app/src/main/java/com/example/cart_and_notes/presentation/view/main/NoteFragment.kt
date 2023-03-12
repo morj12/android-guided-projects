@@ -15,8 +15,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.cart_and_notes.databinding.FragmentNoteBinding
 import com.example.cart_and_notes.domain.entity.Note
 import com.example.cart_and_notes.presentation.adapter.NoteAdapter
-import com.example.cart_and_notes.util.AdditionFragment
-import com.example.cart_and_notes.util.MyApp
+import com.example.cart_and_notes.presentation.view.AdditionFragment
+import com.example.cart_and_notes.MyApp
 import com.example.cart_and_notes.presentation.view.newnote.NewNoteActivity
 
 class NoteFragment : AdditionFragment() {

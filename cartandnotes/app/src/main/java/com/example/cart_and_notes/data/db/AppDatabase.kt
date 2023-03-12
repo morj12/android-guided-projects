@@ -5,6 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.cart_and_notes.data.dao.CartDao
+import com.example.cart_and_notes.data.dao.CartItemDao
 import com.example.cart_and_notes.data.dao.NoteDao
 import com.example.cart_and_notes.data.entity.CartItemDbModel
 import com.example.cart_and_notes.data.entity.CartDbModel
@@ -20,6 +21,7 @@ abstract class AppDatabase : RoomDatabase() {
 
     abstract fun noteDao(): NoteDao
     abstract fun cartDao(): CartDao
+    abstract fun cartItemDao(): CartItemDao
 
     companion object {
 

@@ -15,4 +15,13 @@
     <string name="create_cart">Create</string>
     <string name="update_cart">Update cart</string>
     <string name="update_cart_title">Update cart</string>
+    <string name="delete_cart">Delete cart</string>
+    <string name="clear_cart">Clear cart</string>
+    <string name="new_cart_item">New cart item</string>
+    <string name="save_cart_item">Save cart item</string>
+    <string name="new_item_hint">New item</string>
+    <string name="update_cart_item_title">Update cart item</string>
+    <string name="cart_item_name_hint">Name</string>
+    <string name="cart_item_info_hint">Info</string>
+    <string name="update_cart_item">Update</string>
 </resources>

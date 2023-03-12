@@ -9,4 +9,6 @@
     <color name="green_main_dark">#0E250F</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="grey">#494949</color>
+    <color name="light_grey">#818181</color>
 </resources>

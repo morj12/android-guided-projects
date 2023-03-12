@@ -1,5 +1,6 @@
 package com.example.cart_and_notes.presentation.view.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,8 +14,9 @@ import com.example.cart_and_notes.databinding.FragmentCartBinding
 import com.example.cart_and_notes.domain.entity.Cart
 import com.example.cart_and_notes.presentation.adapter.CartAdapter
 import com.example.cart_and_notes.presentation.dialog.NewCartDialog
-import com.example.cart_and_notes.util.AdditionFragment
-import com.example.cart_and_notes.util.MyApp
+import com.example.cart_and_notes.presentation.view.cart.CartActivity
+import com.example.cart_and_notes.presentation.view.AdditionFragment
+import com.example.cart_and_notes.MyApp
 import com.example.cart_and_notes.util.TimeHelper
 
 class CartFragment : AdditionFragment() {
@@ -34,8 +36,7 @@ class CartFragment : AdditionFragment() {
             it,
             TimeHelper.getCurrentTime(),
             0,
-            0,
-            ""
+            0
         )
         mainViewModel.insertCart(cart)
     }
@@ -98,6 +99,10 @@ class CartFragment : AdditionFragment() {
 
     private fun setupClickListener() {
         adapter.onCartClickListener = {
+            val intent = Intent(activity, CartActivity::class.java).apply {
+                putExtra(CartActivity.CART_KEY, it)
+            }
+            startActivity(intent)
         }
     }
 

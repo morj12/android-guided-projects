@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface CartDao {
 
-    @Query("SELECT * FROM cart_list")
+    @Query("SELECT * FROM cart")
     fun getCarts(): Flow<List<CartDbModel>>
 
     @Insert
