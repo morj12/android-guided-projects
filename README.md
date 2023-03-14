@@ -216,3 +216,26 @@ Introductory services project
 ### Technology and purpose
 
 - Services, WorkManager
+
+## cartandnotes
+
+#### Guided by [Room Persistance Librar - Приложение ShoppingList на Котлин]([https://www.udemy.com/course/android_prof/](https://www.udemy.com/course/room-persistance-librar-shoppinglist/))
+
+### Description
+
+An application which allow to create and edit notes and lists of shopping items. Each list has its own items which can also be edited. There is an options screen which allows to change some preferences such as text size, date format or app colors.
+
+<p align="middle">
+	<img src="images/16.0.cartandnotes.png" alt="Screenshot" width="150"/>
+	&nbsp; &nbsp; &nbsp; &nbsp;
+	<img src="images/16.1.cartandnotes.png" alt="Screenshot" width="150"/>
+	&nbsp; &nbsp; &nbsp; &nbsp;
+	<img src="images/16.2.cartandnotes.png" alt="Screenshot" width="150"/>
+<p/>
+
+### Technology and purpose
+
+- MVVM & Clean Architecture
+- Room with coroutines
+- Usage of fragments and bottom navigation menu
+- Settings and shared preferences
