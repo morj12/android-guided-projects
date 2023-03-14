@@ -34,4 +34,6 @@
     <string name="prefs_chose_theme">Choose theme</string>
     <string name="prefs_text">Text</string>
     <string name="prefs_notes_text_size">Note text size</string>
+    <string name="interstitial_ad_id">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="app_id">ca-app-pub-3940256099942544~3347511713</string>
 </resources>

@@ -56,7 +56,6 @@
             android:layout_toStartOf="@id/bt_edit"
             tools:text="0/0" />
 
-<!--        TODO: change color -->
         <ImageButton
             android:id="@+id/bt_edit"
             android:layout_width="40dp"

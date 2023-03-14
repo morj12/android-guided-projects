@@ -14,8 +14,13 @@ import com.example.cart_and_notes.presentation.view.settings.SettingsActivity
 import com.example.cart_and_notes.util.PrefsConsts.Keys.THEME_KEY
 import com.example.cart_and_notes.util.PrefsConsts.Values.BLUE_THEME
 import com.example.cart_and_notes.util.PrefsTheme.getMainTheme
+import com.google.android.gms.ads.AdError
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.FullScreenContentCallback
+import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 
-// TODO: use use-cases
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -24,6 +29,8 @@ class MainActivity : AppCompatActivity() {
     private var currentTheme = ""
 
     private lateinit var prefs: SharedPreferences
+
+    private var interstitialAd: InterstitialAd? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         initPrefs()
@@ -34,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         initBottomNavigation()
-
+        loadNewAd()
     }
 
     private fun initPrefs() {
@@ -45,7 +52,14 @@ class MainActivity : AppCompatActivity() {
     private fun initBottomNavigation() {
         binding.bottomNav.setOnItemSelectedListener {
             when (it.itemId) {
-                R.id.setting -> startActivity(Intent(this, SettingsActivity::class.java))
+                R.id.setting -> {
+                    showAd(object : AdListener {
+                        override fun onFinish() {
+                            startActivity(Intent(this@MainActivity, SettingsActivity::class.java))
+                        }
+                    })
+
+                }
                 R.id.notes -> {
                     FragmentManager.setFragment(NoteFragment.newInstance(), this)
                     currentTab = R.id.notes
@@ -56,6 +70,48 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             true
+        }
+    }
+
+    private fun loadNewAd() {
+        val request = AdRequest.Builder().build()
+        InterstitialAd.load(
+            this,
+            getString(R.string.interstitial_ad_id),
+            request,
+            object : InterstitialAdLoadCallback() {
+                override fun onAdLoaded(ad: InterstitialAd) {
+                    interstitialAd = ad
+                }
+
+                override fun onAdFailedToLoad(p0: LoadAdError) {
+                    interstitialAd = null
+                }
+            })
+    }
+
+    private fun showAd(adListener: AdListener) {
+        if (interstitialAd != null) {
+            interstitialAd?.fullScreenContentCallback = object : FullScreenContentCallback() {
+                override fun onAdDismissedFullScreenContent() {
+                    interstitialAd = null
+                    loadNewAd()
+                    adListener.onFinish()
+                }
+
+                override fun onAdFailedToShowFullScreenContent(error: AdError) {
+                    interstitialAd = null
+                    loadNewAd()
+                }
+
+                override fun onAdShowedFullScreenContent() {
+                    interstitialAd = null
+                    loadNewAd()
+                }
+            }
+            interstitialAd?.show(this)
+        } else {
+            adListener.onFinish()
         }
     }
 
@@ -75,5 +131,9 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
         binding.bottomNav.selectedItemId = currentTab
         if (prefs.getString(THEME_KEY, BLUE_THEME) != currentTheme) recreate()
+    }
+
+    interface AdListener {
+        fun onFinish()
     }
 }
