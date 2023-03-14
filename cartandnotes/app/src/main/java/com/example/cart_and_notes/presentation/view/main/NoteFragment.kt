@@ -2,6 +2,7 @@ package com.example.cart_and_notes.presentation.view.main
 
 import android.app.Activity
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,15 +10,20 @@ import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.activityViewModels
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.cart_and_notes.databinding.FragmentNoteBinding
 import com.example.cart_and_notes.domain.entity.Note
 import com.example.cart_and_notes.presentation.adapter.NoteAdapter
 import com.example.cart_and_notes.presentation.view.AdditionFragment
 import com.example.cart_and_notes.MyApp
 import com.example.cart_and_notes.presentation.view.newnote.NewNoteActivity
+import com.example.cart_and_notes.util.PrefsConsts.Keys.NOTE_STYLE_KEY
+import com.example.cart_and_notes.util.PrefsConsts.Values.GRID_STYLE
+import com.example.cart_and_notes.util.PrefsConsts.Values.LINEAR_STYLE
 
 class NoteFragment : AdditionFragment() {
 
@@ -33,6 +39,8 @@ class NoteFragment : AdditionFragment() {
 
     private lateinit var adapter: NoteAdapter
 
+    private var prefs: SharedPreferences? = null
+
     override fun onClickNew() {
         editLauncher.launch(Intent(activity, NewNoteActivity::class.java))
     }
@@ -40,6 +48,11 @@ class NoteFragment : AdditionFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         onEditResult()
+        initPrefs()
+    }
+
+    private fun initPrefs() {
+        prefs = PreferenceManager.getDefaultSharedPreferences(requireActivity())
     }
 
     override fun onCreateView(
@@ -58,10 +71,18 @@ class NoteFragment : AdditionFragment() {
         setupClickListener()
     }
 
+    private fun getLayoutManager(): RecyclerView.LayoutManager {
+        return when (val style = prefs?.getString(NOTE_STYLE_KEY, LINEAR_STYLE)) {
+            LINEAR_STYLE -> LinearLayoutManager(activity)
+            GRID_STYLE -> StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+            else -> throw RuntimeException("Unknown style: $style")
+        }
+    }
+
     private fun initRecyclerView() {
         with(binding) {
-            rcNotes.layoutManager = LinearLayoutManager(activity)
-            adapter = NoteAdapter()
+            rcNotes.layoutManager = getLayoutManager()
+            adapter = NoteAdapter(prefs!!)
             rcNotes.adapter = adapter
         }
     }

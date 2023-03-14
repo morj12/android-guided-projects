@@ -31,6 +31,7 @@
                 android:textStyle="bold"
                 android:inputType="textPersonName"
                 android:hint="@string/title_hint"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -43,7 +44,7 @@
                 android:gravity="top"
                 android:hint="@string/description_hint"
                 android:inputType="textMultiLine|textPersonName"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

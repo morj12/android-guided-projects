@@ -1,6 +1,7 @@
 package com.example.cart_and_notes.presentation.adapter
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -11,8 +12,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.cart_and_notes.R
 import com.example.cart_and_notes.databinding.CartItemBinding
 import com.example.cart_and_notes.domain.entity.Cart
+import com.example.cart_and_notes.util.TimeHelper
 
-class CartAdapter : ListAdapter<Cart, CartAdapter.ViewHolder>(CartCallback()) {
+class CartAdapter(private val prefs: SharedPreferences) : ListAdapter<Cart, CartAdapter.ViewHolder>(CartCallback()) {
 
     var onCartClickListener: ((Cart) -> Unit)? = null
     var onEditCartClickListener: ((Cart) -> Unit)? = null
@@ -41,7 +43,7 @@ class CartAdapter : ListAdapter<Cart, CartAdapter.ViewHolder>(CartCallback()) {
         val item = getItem(position)
         with(holder.binding) {
             tvCartName.text = item.name
-            tvCartTime.text = item.creationTime
+            tvCartTime.text = TimeHelper.getTimeFormat(item.creationTime, prefs)
             tvCartCounter.text = root.context.getString(
                 R.string.cart_items_counter,
                 item.checkedItems,

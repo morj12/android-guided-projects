@@ -1,15 +1,20 @@
 package com.example.cart_and_notes.presentation.view.newnote
 
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.preference.PreferenceManager
 import com.example.cart_and_notes.R
 import com.example.cart_and_notes.databinding.ActivityNewNoteBinding
 import com.example.cart_and_notes.domain.entity.Note
 import com.example.cart_and_notes.presentation.view.main.NoteFragment
+import com.example.cart_and_notes.util.PrefsConsts
+import com.example.cart_and_notes.util.PrefsTheme
 import com.example.cart_and_notes.util.TimeHelper
+import com.example.cart_and_notes.util.setTextSize
 
 class NewNoteActivity : AppCompatActivity() {
 
@@ -20,12 +25,17 @@ class NewNoteActivity : AppCompatActivity() {
     private var validTitle = true
     private var validDescription = true
 
+    private lateinit var prefs: SharedPreferences
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        initPrefs()
+        setTheme(PrefsTheme.getNewNoteTheme(prefs))
         super.onCreate(savedInstanceState)
         binding = ActivityNewNoteBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         getNote()
+        setTextSize()
     }
 
     private fun getNote() {
@@ -99,4 +109,20 @@ class NewNoteActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
+
+    private fun initPrefs() {
+        prefs = PreferenceManager.getDefaultSharedPreferences(this)
+    }
+
+    private fun setTextSize() {
+        val size = prefs.getString(
+            PrefsConsts.Keys.NOTES_TEXT_SIZE_KEY,
+            PrefsConsts.Values.DEFAULT_TEXT_SIZE
+        )
+        size.let {
+            binding.edTitle.setTextSize((it!!.toInt() + 2).toString())
+            binding.edDescription.setTextSize(it)
+        }
+    }
+
 }

@@ -1,5 +1,6 @@
 package com.example.cart_and_notes.presentation.view.cart
 
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -7,6 +8,7 @@ import android.view.MenuItem
 import android.view.MenuItem.OnActionExpandListener
 import android.widget.EditText
 import androidx.activity.viewModels
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,6 +20,7 @@ import com.example.cart_and_notes.presentation.view.main.MainViewModel
 import com.example.cart_and_notes.MyApp
 import com.example.cart_and_notes.presentation.adapter.CartItemAdapter
 import com.example.cart_and_notes.presentation.dialog.EditCartItemDialog
+import com.example.cart_and_notes.util.PrefsTheme.getNewNoteTheme
 
 class CartActivity : AppCompatActivity() {
 
@@ -33,9 +36,14 @@ class CartActivity : AppCompatActivity() {
 
     private lateinit var adapter: CartItemAdapter
 
+    private lateinit var prefs: SharedPreferences
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        initPrefs()
+        setTheme(getNewNoteTheme(prefs))
         super.onCreate(savedInstanceState)
         binding = ActivityCartBinding.inflate(layoutInflater)
+
         setContentView(binding.root)
 
         initCart()
@@ -43,6 +51,10 @@ class CartActivity : AppCompatActivity() {
         observe()
         initClickListener()
         setupSwipeListener()
+    }
+
+    private fun initPrefs() {
+        prefs = PreferenceManager.getDefaultSharedPreferences(this)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -115,7 +127,7 @@ class CartActivity : AppCompatActivity() {
 
     private fun initRecyclerView() = with(binding) {
         rcCartItems.layoutManager = LinearLayoutManager(this@CartActivity)
-        adapter = CartItemAdapter()
+        adapter = CartItemAdapter(PreferenceManager.getDefaultSharedPreferences(applicationContext))
         rcCartItems.adapter = adapter
     }
 
