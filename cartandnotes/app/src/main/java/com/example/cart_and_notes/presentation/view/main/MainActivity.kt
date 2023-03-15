@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         initBottomNavigation()
-        loadNewAd()
+//        loadNewAd()
     }
 
     private fun initPrefs() {
@@ -53,11 +53,11 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNav.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.setting -> {
-                    showAd(object : AdListener {
-                        override fun onFinish() {
-                            startActivity(Intent(this@MainActivity, SettingsActivity::class.java))
-                        }
-                    })
+//                    showAd(object : AdListener {
+//                        override fun onFinish() {
+                    startActivity(Intent(this@MainActivity, SettingsActivity::class.java))
+//                        }
+//                    })
 
                 }
                 R.id.notes -> {
