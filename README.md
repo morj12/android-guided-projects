@@ -239,3 +239,15 @@ An application which allow to create and edit notes and lists of shopping items.
 - Room with coroutines
 - Usage of fragments and bottom navigation menu
 - Settings and shared preferences
+
+## cartandnotes
+
+#### Guided by [Room Persistance Librar - Приложение ShoppingList на Котлин]([https://www.udemy.com/course/android_prof/](https://www.udemy.com/course/room-persistance-librar-shoppinglist/))
+
+### JetBizCard
+
+Introductory Compose Project
+
+### Technology and purpose
+
+- Jetpack Compose
