@@ -246,7 +246,19 @@ An application which allow to create and edit notes and lists of shopping items.
 
 ## Description
 
-Introductory Compose Project
+Introductory Compose project
+
+### Technology and purpose
+
+- Jetpack Compose
+
+## introtocompose
+
+#### Guided by [Android Jetpack Compose: The Comprehensive Bootcamp](https://www.udemy.com/course/kotling-android-jetpack-compose-/)
+
+## Description
+
+Yet another introductory Compose project
 
 ### Technology and purpose
 
