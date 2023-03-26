@@ -219,7 +219,7 @@ Introductory services project
 
 ## cartandnotes
 
-#### Guided by [Room Persistance Librar - Приложение ShoppingList на Котлин]([https://www.udemy.com/course/android_prof/](https://www.udemy.com/course/room-persistance-librar-shoppinglist/))
+#### Guided by [Room Persistance Librar - Приложение ShoppingList на Котлин](https://www.udemy.com/course/room-persistance-librar-shoppinglist/)
 
 ### Description
 
@@ -240,11 +240,11 @@ An application which allow to create and edit notes and lists of shopping items.
 - Usage of fragments and bottom navigation menu
 - Settings and shared preferences
 
-## cartandnotes
+## jetbizcard
 
-#### Guided by [Room Persistance Librar - Приложение ShoppingList на Котлин]([https://www.udemy.com/course/android_prof/](https://www.udemy.com/course/room-persistance-librar-shoppinglist/))
+#### Guided by [Android Jetpack Compose: The Comprehensive Bootcamp](https://www.udemy.com/course/kotling-android-jetpack-compose-/)
 
-### JetBizCard
+## Description
 
 Introductory Compose Project
 
